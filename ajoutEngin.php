@@ -1,81 +1,140 @@
 <?php
 include 'header.php';
+include './Models/engins.php';
+include './Models/types.php';
+include './Models/equipements.php';
+include './Models/clients.php';
+include './Controllers/ctrlAjoutEngin.php';
 ?>
-    <q-btn type="a" href="index.php" no-caps target="_self" class="" push color="primary" glossy unelevated icon="home" label="Accueil"></q-btn>
-    <q-btn type="a" href="tableauDeBord.php" no-caps target="_self" class="" push color="primary" glossy unelevated icon="dashboard" label="Tableau De Bord"></q-btn>
-    <q-btn type="a" href="index.php" no-caps target="_self" class="btnDecon" push glossy unelevated icon="logout" label="Déconnexion"></q-btn><!-- Btn de deconnexion -->
+<div class="btnAjoutEngin text-center">
+  <a class="btn btn-outline-primary btn-sm" href="index.php"><i class="fas fa-home fa-2x"></i> Accueil</a>
+<!-- Btn CRUD -->
+	<a class="btn btn-outline-primary btn-sm" href="tableauDeBord.php"><i class="fas fa-tachometer-alt fa-2x"></i> Tableau De Bord</a>
+  <a class="btn btn-outline-danger btn-sm" href="index.php"><i class="fas fa-sign-out-alt fa-2x"></i> Déconnexion</a>
+</div>
 
 <!-- Début Formulaire -->
 <!-- Titre Formulaire -->
- <q-toolbar-title class="text-center formAjoutEng" id="titreAjoutEngin">Ajouter un Engin</q-toolbar-title>
-<!-- DropDown de champ Chariot -->
-    <q-select 
-      v-model="chariot" 
-      transition-show="scale"
-      transition-hide="scale"
-      :options="optionsChariot" 
-      label="Type de Chariot">
-      <template v-slot:option="scope">
-      <q-item v-bind="scope.itemProps">
-        <q-item-section avatar>
-          <q-img :src="scope.opt.imageChariot"></q-img>
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>{{ scope.opt.label }}</q-item-label>
-        </q-item-section>
-      </q-item>
-      </template>
-    </q-select>
-    <!-- Input en Majuscule -->
-    <q-input v-model="numero" oninput="this.value = this.value.toUpperCase()"  label="Numéro"></q-input>
-  <!-- DropDown de champ Equipements -->
-    <q-select
-      v-model="equipements"
-      :options="optionsEquipements"
-      label="Equipements"
-      transition-show="scale"
-      transition-hide="scale"
-      multiple
-      emit-value
-      map-options>
-    <template v-slot:option="{ itemProps, opt, selected, toggleOption }">
-      <q-item v-bind="itemProps">
-        <q-item-section>
-          <q-item-label v-html="opt.label" ></q-item-label>
-        </q-item-section>
-      <q-item-section side>
-        <q-toggle :model-value="selected" @update:model-value="toggleOption(opt)"></q-toggle>
-      </q-item-section>
-      </q-item>
-    </template>
-    </q-select>
-  <!-- DropDown de champ Disponibilité des Chariots -->
-    <q-select v-model="statut" :options="optionsStatut" label="Statut" transition-show="scale" transition-hide="scale">
-    <template v-slot:option="scope">
-      <q-item v-bind="scope.itemProps">
-        <q-item-section avatar>
-          <q-img :src="scope.opt.imgStatut"></q-img>
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>{{ scope.opt.label }}</q-item-label>
-          <q-item-label caption>{{ scope.opt.description }}</q-item-label>
-        </q-item-section>
-      </q-item>
-    </template>
-    </q-select>
-    <q-input v-model="heurejour" type="time" label="Heure/Jour"></q-input>
-    <q-select v-model="client" :options="clients" label="Client" /></q-select>
-    <q-btn push color="primary" label="Valider" id="btnValider" glossy unelevated icon="check_circle"></q-btn>
+ <h1 class="text-center mt-3" id="titreAjoutEngin">Ajouter un Engin</h1>
+
+<div class="formAjoutEngin">
+	<form action="ajoutEngin.php" method="POST" enctype="multipart/form-data"> 
+	<!-- TYPE D'ENGINE -->
+  <div class="form-group">
+    <label for="typeEngin" id="labelForm">Type d'engin</label>
+    <select id="typeEngin" class="form-control" name="typeEngin">
+      <option selected disabled>Choisissez le Type :</option><?php
+      foreach($typesListe as $types){ ?>
+      <option value="<?= $types->id_types ?>"><?= $types->id_types . ' . ' . $types->nomTypes ?></option><?php
+      } ?>
+    </select>	
+    <!--message d'erreur-->
+    <p class="errorForm"><?= isset($formErrors['id_types']) ? $formErrors['id_types'] : '' ?></p>
+  </div>
+  <!-- NUMERO D'ENGIN -->
+  <div class="form-group">
+    <label for="numeroEngin" id="labelForm">Numéro d'engin</label>
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="numeroEngin" <?= count($formErrors) > 0 ? (isset($formErrors['numeroEngin']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['numeroEngin']) ? $_POST['numeroEngin'] : '' ?>" type="text" name="numeroEngin" />
+      <!--message d'erreur-->
+      <p class="errorForm"><?= isset($formErrors['numeroEngin']) ? $formErrors['numeroEngin'] : '' ?></p>
+  </div>
+<!-- EQUIPEMENTS -->
+<div class="form-group">
+    <label for="equipements" id="labelForm">Le(s) Equipement(s)</label>
+    <select class="custom-select" multiple id="equipements" name="equipements">
+      <option selected disabled>Choisissez le(s) Equipement(s) :</option><?php
+      foreach($equipementsListe as $equipements){ ?>
+      <option value="<?= $equipements->id_equipements ?>"><?= $equipements->id_equipements . ' . ' . $equipements->nomEquipements ?></option><?php
+      } ?>
+       </select>	
+    <!--message d'erreur-->
+    <p class="errorForm"><?= isset($formErrors['id_equipements']) ? $formErrors['id_equipements'] : '' ?></p>
+</div>
+
+<!-- STATUT -->
+<div class="form-group">
+    <label for="statut" id="labelForm">Disponibilité</label>
+    <select class="form-control" id="statut" name="statut">
+      <option selected disabled>Choisissez la disponibilité :</option>
+      <option value="oui">Oui</option>
+      <option value="non">Non</option>
+    </select>
+    <p class="errorForm"><?= isset($formErrors['statut']) ? $formErrors['statut'] : '' ?></p>
+  </div>
+  <!-- DERNIER REVISION -->
+  <div class="form-group">
+    <label for="dernierRevision" id="labelForm">Dernier Revision</label>
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="dernierRevision" <?= count($formErrors) > 0 ? (isset($formErrors['dernierRevision']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['dernierRevision']) ? $_POST['dernierRevision'] : '' ?>" type="date" name="dernierRevision" />
+      <!--message d'erreur-->
+      <p class="errorForm"><?= isset($formErrors['dernierRevision']) ? $formErrors['dernierRevision'] : '' ?></p>
+  </div>
+
+    <!-- PROCHAIN REVISION -->
+    <div class="form-group">
+    <label for="prochainRevision" id="labelForm">Dernier Revision</label>
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="prochainRevision" <?= count($formErrors) > 0 ? (isset($formErrors['prochainRevision']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['prochainRevision']) ? $_POST['prochainRevision'] : '' ?>" type="date" name="prochainRevision" />
+      <!--message d'erreur-->
+      <p class="errorForm"><?= isset($formErrors['prochainRevision']) ? $formErrors['prochainRevision'] : '' ?></p>
+  </div>
+
+    <!-- KM REEL -->
+    <div class="form-group">
+    <label for="km_reel" id="labelForm">Kilométrage</label>
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="km_reel" <?= count($formErrors) > 0 ? (isset($formErrors['km_reel']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['km_reel']) ? $_POST['km_reel'] : '' ?>" type="number" name="km_reel" />
+      <!--message d'erreur-->
+      <p class="errorForm"><?= isset($formErrors['km_reel']) ? $formErrors['km_reel'] : '' ?></p>
+  </div>
+      <!-- HORAMETRE -->
+        <div class="form-group">
+    <label for="horametre" id="labelForm">Horamétre</label>
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="horametre" <?= count($formErrors) > 0 ? (isset($formErrors['horametre']) ? 'is-invalid' : 'is-valid') : ''?>value="<?= isset($_POST['horametre']) ? $_POST['horametre'] : '' ?>" type="text" name="horametre" />
+    <small>Ex : 234 H 56 M</small>
+    <!--message d'erreur-->
+      <p class="errorForm"><?= isset($formErrors['horametre']) ? $formErrors['horametre'] : '' ?></p>
+  </div>
+
+  	<!-- CLIENT -->
+    <div class="form-group">
+    <label for="client" id="labelForm">Client</label>
+    <select id="client" class="form-control" name="client">
+      <option selected disabled>Choisissez le Client :</option><?php
+      foreach($clientsListe as $clients){ ?>
+      <option value="<?= $clients->id_Clients ?>"><?= $clients->id_Clients . ' . ' . $clients->nomClients ?></option><?php
+      } ?>
+    </select>	
+    <!--message d'erreur-->
+    <p class="errorForm"><?= isset($formErrors['id_Clients']) ? $formErrors['id_Clients'] : '' ?></p>
+  </div>
+<!-- IMAGE -->
+  <div class="form-group">
+            <label for="image" id="labelForm">Image</label>
+            <input id="image" class="form-control <?= count($formErrors) > 0 ? (isset($formErrors['image']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= isset($_POST['image']) ? $_POST['image'] : '' ?>" type="file" name="image" />
+            <!--message d'erreur-->
+            <p class="errorForm"><?= isset($formErrors['image']) ? $formErrors['image'] : '' ?></p>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--message de succés ou d'erreur-->
+		<p class="formMessage"><?= isset($addEnginMessage) ? $addEnginMessage : '' ?></p>
+	<!-- Btn validation -->
+	<div>	
+    <button type="submit" name="addEngin" class="btn btn-primary btn-sm">Valider</button>
+    <button type="reset" class="btn btn-warning btn-sm">Réinitialiser</button>
+  </div>
+  </form>
 </div>
 
 <!-- Affichage de Footer -->
 <?php
   include 'footer.php'
 ?>
-
-
-
-
-
-
-

@@ -7,20 +7,19 @@ $types = new types();
     } else {
         $formErrors['nomTypes'] = 'L\'information n\'est pas renseigné';
     }
-    // Validation//
-    if (empty($formErrors['nomType'])) {  
-        if (!$types->checkTypeExist()) { 
-            if ($types->nomTypes != ""){
-                if($types->addType()){
-                 $addTypeMessage = '<q-btn class="full-width btnErrCode" push color="green" glossy unelevated icon="check" label="Le Type d\'Engin a bien été ajouté."></q-btn>';
-            } else {
-                $addTypeMessage = '<q-btn class="full-width btnErrCode" push color="red" glossy unelevated icon="error" label="Une erreur est survenue."></q-btn>';
-                } 
-            }else {
-                $addTypeMessage = '<q-btn class="full-width btnErrCode" push color="red" glossy unelevated icon="error" label="Veuillez renseigner ce champ"></q-btn>';
-                }
-            } else {
-                $addTypeMessage = '<q-btn class="full-width btnErrCode" push color="red" glossy unelevated icon="error" label="Le type d\'Engin existe."></q-btn>';
-            }  
-  }  
+   // Validation//
+   if (empty($formErrors['nomTypes'])) { 
+    if (!$types->checkTypeExist()){ 
+       if($types->addType()){
+           $addTypesMessage = 
+           '<div class="alert alert-success" role="alert"><i class="far fa-check-circle"></i> Le Type d\'engin a bien été ajouté</div>';
+       } else {
+           $addTypesMessage = 
+           '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Une erreur est survenue.</div>';
+       }
+   } else {
+       $addTypesMessage = 
+       '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Le Type d\'engin existe.</div>';
+   } 
+}   
 /*    }    */

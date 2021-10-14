@@ -2,26 +2,32 @@
 include 'header.php';
 include './Models/types.php';
 include './Controllers/ctrlAjoutType.php';
-
 ?>
-    <q-btn type="a" href="index.php" no-caps target="_self" push color="primary" glossy unelevated icon="home" label="Accueil"></q-btn>
-    <q-btn type="a" href="tableauDeBord.php" no-caps target="_self" push color="primary" glossy unelevated icon="dashboard" label="Tableau De Bord"></q-btn>
-    <q-btn type="a" href="index.php" no-caps target="_self" class="btnDecon" push glossy unelevated icon="logout" label="Déconnexion"></q-btn><!-- Btn de deconnexion -->
-
-
+<div class="btnAjoutType text-center">
+    <a class="btn btn-outline-primary btn-sm" href="index.php"><i class="fas fa-home fa-2x"></i> Accueil</a>
+    	<!-- Btn CRUD -->
+	<a class="btn btn-outline-primary btn-sm" href="tableauDeBord.php"><i class="fas fa-tachometer-alt fa-2x"></i> Tableau De Bord</a>
+    <a class="btn btn-outline-danger btn-sm" href="index.php"><i class="fas fa-sign-out-alt fa-2x"></i> Déconnexion</a>
+</div>
 <!-- Début Formulaire -->
 <!-- Titre Formulaire -->
- <q-toolbar-title class="text-center" id="titreAjoutType">Ajouter un Type</q-toolbar-title>
+<h1 class="text-center mt-3" id="titreAjoutEquipement">Ajouter un Type d'engin</h1>
 
- <q-form action="ajoutType.php" method="POST" >
-	<!-- Nom des Types -->
-	<q-input oninput="this.value = this.value.toUpperCase()" v-model="nomType"  id="nomTypes" <?= count($formErrors) > 0 ? (isset($formErrors['nomTypes']) ? 'is-invalid' : 'is-valid') : '' ?> label="Nom de Type" value="<?= isset($_POST['nomTypes']) ? $_POST['nomTypes'] : '' ?>" type="text" name="nomTypes" /></q-input>
+<div class="formAjoutType">
+	<form action="ajoutType.php" method="POST">
+		<div class="form-group">
+			<label for="nomTypes" id="labelForm">Nom de Type d'engin</label>
+			<input oninput="this.value = this.value.toUpperCase()" class="form-control" id="nomTypes" <?= count($formErrors) > 0 ? (isset($formErrors['nomTypes']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['nomTypes']) ? $_POST['nomTypes'] : '' ?>" type="text" name="nomTypes" />
+			<small id="help" class="form-text text-muted">Entrez un nouveau engin</small>
+		</div>
 	<!--message de succés ou d'erreur-->
-	<p class="formMessage"><?= isset($addTypeMessage) ? $addTypeMessage : '' ?></p>
- <!-- Btn validation -->
- <q-btn push color="primary" name="addType" type="submit" label="Valider" id="btnValider" glossy unelevated icon="check_circle"></q-btn>
+		<p class="formMessage"><?= isset($addTypesMessage) ? $addTypesMessage : '' ?></p>
+	<!-- Btn validation -->
+		<button type="submit" name="addTypes" class="btn btn-primary btn-sm">Valider</button>
+	    <button type="reset" class="btn btn-warning btn-sm">Réinitialiser</button>
+	</form>
+</div>
 
-</q-form>
 <!-- Affichage de Footer -->
 <?php
   include 'footer.php'

@@ -5,21 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Assets/Img/imgHead.png">
-    <link href="quasar/2.0.0-beta.12/quasar.css" rel="stylesheet" type="text/css">
+    <title>Digit Engin</title>
     <link rel="stylesheet" href="Assets/Styles/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Digit Engin - FM Logistic</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
 </head>
 <body>
     <!-- Header Image -->
     <div>
-        <q-header elevated >
+        <header >
             <img class="header" src="Assets/Img/logo.jpg" class="img-fluid" alt="imgLogo">
-        </q-header>
+        </header>
     </div>
-    <div id="q-app" style="min-height: 100vh;">
-        <div class="q-gutter-md tdb" style="max-width: 100%">
+    <div class="container">
             <h1 class="text-right titreUtilisateur">Bonjour <strong>Jérome</strong></h1><!-- Affichage de userName de utilisateur -->
+    </div>

@@ -2,12 +2,19 @@
 include 'header.php';
 ?>
 <!-- Les Buttons de la page d'Accueil -->
-  <q-btn type="a" href=""  no-caps target="_self" label="Accueil InfoTerrain" push glossy unelevated color="primary" icon="assignment_return"/></q-btn>
-  <q-btn type="a" href="debutSession.php"  no-caps target="_self" label="Debut Session" push glossy unelevated color="primary" icon="play_arrow"/></q-btn>
-  <q-btn type="a" href="finSession.php" no-caps target="_self" label="Fin Session" push glossy unelevated color="primary" icon="check_circle_outline"/></q-btn>
-  <q-btn type="a" href="tableauDeBord.php" no-caps target="_self" label="Tableau De Bord" push glossy unelevated color="primary" icon="dashboard" /></q-btn>
-  <q-btn type="a" href="index.php" no-caps target="_self" class="btnDecon" push glossy unelevated icon="logout" label="Déconnexion"></q-btn><!-- Btn de deconnexion -->
-  <!-- Affichage de Footer -->
+<div class="btnIndex text-center">
+<a class="btn btn-outline-primary btn-sm" href=""><i class="fas fa-home fa-2x"></i> Accueil InfoTerrain</a>
+<a class="btn btn-outline-primary btn-sm" href="debutSession.php"><i class="fas fa-play fa-2x"></i> Prise Poste</a>
+<a class="btn btn-outline-primary btn-sm" href="finSession.php"><i class="fas fa-stop fa-2x"></i> Fin Poste</a>
+<a class="btn btn-outline-primary btn-sm" href="tableauDeBord.php"><i class="fas fa-tachometer-alt fa-2x"></i> Tableau De Bord</a>
+<a class="btn btn-outline-danger btn-sm" href="index.php"><i class="fas fa-sign-out-alt fa-2x"></i> Déconnexion</a>
+</div>
+
+
+
+
+
+<!-- Affichage de Footer -->
 <?php
 include 'footer.php'
 ?>

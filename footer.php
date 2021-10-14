@@ -1,19 +1,15 @@
-<q-layout view="hHh lpR fFf">
-        <q-page-container>
-          <router-view />
-        </q-page-container>
-<q-footer elevated class="text-center" id="footer">
-  <q-toolbar>
-    <q-toolbar-title>© FM Logistic</q-toolbar-title>
-</q-footer> 
-    </q-layout>
-</div>
-<!-- Scripts de VueJs et QUASAR Framework -->
-<script src="vue.js/3.0.11/vue.js"></script>
-<script src="quasar/2.0.0-beta.12/quasar.umd.js"></script>
-<!-- Scripts de JS Main -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 <script src="Assets/Scripts/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 </body>
+<footer class="page-footer font-small fixed-bottom">
+         <div class="footer-copyright text-center py-3">© FM Logistic:
+            <a href="https://www.fmlogistic.fr/" class="text-light"> fmlogistic.fr</a>
+         </div>
+      </footer>
 </html>

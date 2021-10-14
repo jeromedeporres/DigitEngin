@@ -1,12 +1,25 @@
-/**************************** Police Raleway ensemble de site web **********************/
+/* Pour eviter le padding-right ajouter par la modal BS  */
+
+body {
+    padding-right: 0 !important
+}
+
+
+/**************************** Police RALEWAY ensemble de site web **********************/
 
 * {
     font-family: 'Raleway', sans-serif;
 }
 
+
+/**************************** DATE ET HOURE SUR DEBUT ET FIN POSTE **********************/
+
 .dateHeure {
     color: #164194;
 }
+
+
+/**************************** IMAGE LOGO **********************/
 
 .header {
     height: 150px;
@@ -14,42 +27,7 @@
 }
 
 
-/***************************** Footer *****************************/
-
-#footer {
-    background-color: #DADADA;
-    color: #164194;
-}
-
-
-/****************************** Les Buttons ******************************/
-
-.btnDecon {
-    color: #e62d20;
-}
-
-#btnModif {
-    color: #ffcc00;
-}
-
-#btnSupp {
-    color: #e62d20;
-}
-
-#btnValider {
-    margin-top: 8%;
-    font-size: 16px;
-}
-
-
-/* .partieHaut {
-    margin-bottom: 5%;
-    margin-top: 0%;
-}
- */
-
-
-/****************************** Titre des pages ******************************/
+/****************************** TITRES LES PAGES ******************************/
 
 .titreUtilisateur {
     color: #164194;
@@ -58,12 +36,17 @@
 
 #titreAjoutEngin,
 #titreAjoutType,
+#titreAjoutClient,
 #titreAjoutEquipement,
 #titreModifEngin,
 #titreTdb,
 #titreDebutSession,
-#titreFinSession {
-    margin-bottom: 5%;
+#titreFinSession,
+#titreAjoutAnomalies,
+#titreDebSession,
+#titreModifClient,
+#titreModifEquipement {
+    margin-bottom: 2%;
     font-size: 25px;
     font-weight: bold;
     text-transform: uppercase;
@@ -71,28 +54,35 @@
 }
 
 
-/****************************** THeader de la tableau de bord ******************************/
+/****************************** LES FORMULAIRES DE CRUD ******************************/
 
-.q-table th {
-    font-weight: bold;
+.tableClients,
+.tdbPrincipale,
+.tableTypes,
+.tableEquipements,
+.tableAnomalies {
+    text-align: center;
+    margin-bottom: 10%;
+    font-size: 12px;
+}
+
+@media only screen and (max-width: 768px) {
+    .formAjoutEng,
+    .tableClients,
+    .tdbPrincipale,
+    .tableTypes,
+    .tableEquipements,
+    .tableAnomalies {
+        margin-bottom: 25%;
+    }
 }
 
 
-/****************************** Les Formulaires de CRUD ******************************/
+/**************************** HEADERS DES TABLEAU DE BORDS **********************/
 
-.tdb {
-    text-align: center;
-    align-items: center;
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-.formAjoutEng,
-.formModifEng {
-    text-align: center;
-    align-items: center;
-    margin-left: 20%;
-    margin-right: 20%;
+.tdbTr {
+    background-color: #164194;
+    color: #fff;
 }
 
 @media only screen and (max-width: 768px) {
@@ -105,7 +95,7 @@
 }
 
 
-/* FORM */
+/**************************** LES BTN SUR LES FORMULAIRES **********************/
 
 .btnErrCode {
     margin-top: 3%;
@@ -114,4 +104,118 @@
 .tri {
     margin-left: 40%;
     margin-right: 40%;
+}
+
+#btnCsv {
+    padding: 2%;
+}
+
+.fa-trash-alt {
+    color: #e62d20;
+}
+
+.fa-edit {
+    color: #ffcc00;
+}
+
+.btnListeClients>a,
+.btnTdbMain>a,
+.btnIndex>a,
+.btnAjoutClient>a,
+.btnAjoutType>a,
+.btnAjoutEngin>a,
+.btnDebSession>a,
+.btnModifClient>a,
+.btnListeTypes>a,
+.btnListeEquipements>a {
+    margin: 1%;
+    text-transform: uppercase;
+}
+
+
+/**************************** FOOTER **********************/
+
+footer {
+    background-color: #164194;
+    color: #fff;
+    width: 100%;
+}
+
+
+/**************************** FORMULAIRES A AJOUTER **********************/
+
+.formAjoutClient,
+.formAjoutEquipement,
+.formAjoutType,
+.formAjoutEngin,
+.formModifClient,
+.formAjoutAnomalies {
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    background: white;
+    box-shadow: 14px 14px 20px #164194, 14px 14px 20px #164194;
+    margin: 25%;
+    margin-top: 0%;
+    margin-bottom: 10%;
+    text-align: center;
+    align-items: center;
+}
+
+input[type=text],
+input[type=number],
+input[type=date],
+textarea[type=text] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #164194;
+}
+
+@media only screen and (max-width: 768px) {
+    .formAjoutClient,
+    .formAjoutEquipement,
+    .formAjoutType,
+    .formAjoutEngin,
+    .formModifClient,
+    .formAjoutAnomalies {
+        margin: 5%;
+        margin-bottom: 25%;
+    }
+}
+
+#labelForm {
+    color: #164194;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+/**************************** MODAL BS DES ANOMALIES **********************/
+
+#imgAnomalies {
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+#imgAnomalies:hover {
+    transform: scale(3);
+}
+
+
+/**************************** ALERT BS DE SUPPRESSION **********************/
+
+.alert {
+    display: inline-block;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+@media only screen and (max-width: 768px) {
+    .alert {
+        margin: 0;
+    }
 }
