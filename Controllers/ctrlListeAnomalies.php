@@ -1,7 +1,17 @@
 <?php
 $anomalies = new anomalies();
-if(isset($_POST['sendSearch'])){
-    $search = htmlspecialchars($_POST['search']);
+$listeAnomalies = $anomalies->getAnomalies(); 
+
+$anomalies = new anomalies();
+$anomaliesParEngins = $anomalies->getAnomaliesByEngin(); 
+
+
+/* if(isset($_POST['sendSearch'])){
+    $listeAnomalies = $anomalies->getAnomalies(); */
+   /*  $resultsNumber = count($listeAnomalies);
+    $searchMessage = 'Il y a ' . $resultsNumber . ' anomalies'; */
+    /* $link = 'listeAnomalies.php?'; */
+   /*  $search = htmlspecialchars($_POST['search']);
     
     $resultsNumber = $anomalies->countSearchResult($search);
     $link = 'listeAnomalies.php?search=' . $_GET['search'] . '&sendSearch=';
@@ -10,13 +20,10 @@ if(isset($_POST['sendSearch'])){
     }else{
         $searchMessage = 'Il y a ' . $resultsNumber . ' résultats';
         $listeAnomalies = $anomalies->searchAnomListeByName($search);
-    }
-}else{
-    $listeAnomalies = $anomalies->getAnomalies();
-    $resultsNumber = count($listeAnomalies);
-    $searchMessage = 'Il y a ' . $resultsNumber . ' anomalies';
-    $link = 'listeAnomalies.php?';
-}
+    } */
+/* }else{ */
+    
+/* } */
 
 if(!empty($_GET['idDelete'])){
     $anomalies->id_anomalies = htmlspecialchars($_GET['idDelete']);
@@ -27,7 +34,7 @@ if(!empty($_GET['idDelete'])){
 }
 if(isset($_POST['confirmDelete'])){
                if($anomalies->deleteAnomalies());
-                header('location:./listeAnomalies.php'); 
+                /* header('location:./listeAnomalies.php');  */
             }else {
                 $message = 'une erreur est survenue lors de la suppression';       
     }

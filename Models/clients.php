@@ -14,15 +14,15 @@ class clients
 	}
 	public function checkClientExist(){
         $checkClientExist = $this->db->prepare(
-            'SELECT COUNT(`id_Clients`) AS `isClientExist`
+            'SELECT * 
             FROM `clients` 
             WHERE `nomClients` = :nomClients'
         );
         $checkClientExist->bindvalue(':nomClients', $this->nomClients, PDO::PARAM_STR);
         $checkClientExist->execute();
-        return $checkClientExist->fetch(PDO::FETCH_OBJ)->isClientExist;
+        return $checkClientExist->fetch(PDO::FETCH_OBJ);
     }
-	public function getClient(){
+	public function getClients(){
         $getClient = $this->db->prepare(
             'SELECT `id_Clients`, `nomClients`
             FROM `clients`;'
@@ -30,6 +30,32 @@ class clients
         $getClient->execute();
         return $getClient->fetchAll(PDO::FETCH_OBJ);
     }
+
+
+    public function getClient(){
+        $getClient = $this->db->prepare(
+            'SELECT `nomClients`
+            FROM `clients`;
+            WHERE `id_Clients` = :id_Clients;'
+        );
+        $getClient->execute();
+        return $getClient->fetchAll(PDO::FETCH_OBJ);
+    }
+
+   /*  public function getClient(){
+        $getClient = $this->db->prepare(
+            'SELECT `nomClients`
+            FROM `clients`
+            WHERE `id_Clients` = :id_Clients;'
+        );
+        $getClient->bindvalue(':id_Clients', $this->id_Clients, PDO::PARAM_INT);
+        $getClient->execute();
+         $row = $getClient->fetch();
+         $this->nomClients = $row['nomClients']; */
+/*         return $row['nomClients'];
+ */
+    /* } */
+
 	public function checkIdClientExist(){
         $checkIdClientExist = $this->db->prepare(
             'SELECT COUNT(`id_Clients`) AS `isIdClientExist`
@@ -42,8 +68,7 @@ class clients
         return $data->isIdClientExist;     
     } 
 	public function addClient(){
-     
-            $addClientQuery = $this->db->prepare(    
+                 $addClientQuery = $this->db->prepare(    
                 'INSERT INTO `clients` (`nomClients`)
                 VALUES (:nomClients)'
             );
@@ -51,6 +76,19 @@ class clients
             return $addClientQuery->execute();
    
     }
+
+    public function getClientInfo() {
+        $getClientInfoQuery = $this->db->prepare(
+            'SELECT `id_Clients`, `nomClients`
+            FROM `clients`
+            WHERE `id_Clients` = :id_Clients '
+        );
+        $getClientInfoQuery->bindValue(':id_Clients', $this->id_Clients, PDO::PARAM_INT);
+        $getClientInfoQuery->execute();
+        return $getClientInfoQuery->fetch(PDO::FETCH_OBJ);
+    } 
+
+
 	public function modifyClient(){
         $modifyClientQuery = $this->db->prepare(
            'UPDATE `clients` 

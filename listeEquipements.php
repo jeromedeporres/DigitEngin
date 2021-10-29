@@ -28,7 +28,7 @@ if(isset($_GET['idDelete'])){ ?>
   } ?>
 
 <div class="pl-3 pr-3 tableEquipements table-responsive">
-<table class="table table-hover" id="csvFormat">
+<table class="table table-hover" id="listeEquipements">
 <button onclick="exportCSV('xlsx')" type="button" class="btn btn-success btn-sm float-left mb-1">Exporter en format csv</button>
   <thead >
     <tr class="tdbTr">
@@ -42,7 +42,7 @@ if(isset($_GET['idDelete'])){ ?>
       <tr>
         <td><?= $equipementsListe->id_equipements ?></td>
         <td><?= $equipementsListe->nomEquipements ?></td>
-        <td> <a href="modifEquipement.php?&id_equipements=<?= $equipementsListe->id_equipements ?>"><i class="fas fa-edit fa-2x"></i></a>
+        <td> <a href="modifEquipements.php?&id_equipements=<?= $equipementsListe->id_equipements ?>"><i class="fas fa-edit fa-2x"></i></a>
             <a href="listeEquipements.php?&idDelete=<?= $equipementsListe->id_equipements ?>"><i class="far fa-trash-alt fa-2x"></i></a></td>
       </tr><?php }
     ?>

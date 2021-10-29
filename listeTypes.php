@@ -29,7 +29,7 @@ if(isset($_GET['idDelete'])){ ?>
   } ?>
 
 <div class="pl-3 pr-3 tableTypes table-responsive">
-<table class="table table-hover" id="csvFormat">
+<table class="table table-hover" id="listeTypes">
 <button onclick="exportCSV('xlsx')" type="button" class="btn btn-success btn-sm float-left mb-1">Exporter en format csv</button>
   <thead >
     <tr class="tdbTr">
@@ -49,6 +49,7 @@ if(isset($_GET['idDelete'])){ ?>
     ?>
   </tbody>
     </table>
+    
 </div>
 <!-- Footer -->
 <?php

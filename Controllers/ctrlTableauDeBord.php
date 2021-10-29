@@ -1,6 +1,10 @@
 <?php
 $engins = new engins();
-if(isset($_POST['sendSearch'])){
+$orderBy = (!empty($_POST['orderBy'])) ? htmlspecialchars($_POST['orderBy']) : 'id_Engins';
+$listeEngins = $engins->getEnginsList($orderBy);
+
+
+/* if(isset($_POST['sendSearch'])){
     $search = htmlspecialchars($_POST['search']);
     
     $resultsNumber = $engins->countSearchResult($search);
@@ -9,16 +13,17 @@ if(isset($_POST['sendSearch'])){
         $searchMessage = 'Aucun resultat ne correspond à votre recherche';
     }else{
         $searchMessage = 'Il y a ' . $resultsNumber . ' résultats';
-        $listeEngins = $engins->searchEnginsListByName($search);
+         $listeEngins = $engins->searchEnginsListByName($search); 
     }
 }else{
     $orderBy = (!empty($_POST['orderBy'])) ? htmlspecialchars($_POST['orderBy']) : 'id_Engins';
     $listeEngins = $engins->getEnginsList($orderBy);
     $resultsNumber = count($listeEngins);
     $searchMessage = 'Il y a ' . $resultsNumber . ' engins';
-    $link = 'tableauDeBord.php?';
+    $link = './tableauDeBord.php?';
+     $listeAnomalies=$engins->getAnomaliesByEngin($listeEngins->id_Engins); 
 }
-
+ */
 
 
 if(!empty($_GET['idDelete'])){
@@ -28,10 +33,18 @@ if(!empty($_GET['idDelete'])){
 }else {
     $deleteMessage = 'Aucun utilisateur n\'a été sélectionné';
 }
-if(isset($_POST['confirmDelete'])){
+
+/* if(isset($_POST['confirmDelete'])){
+    if($engins->checkIdEnginsExist()){
+        $engins->deleteEngins();
+    }else {
+        $message = 'une erreur est survenue lors de la suppression';
+    }
+} */
+
+ if(isset($_POST['confirmDelete'])){
                  if($engins->deleteEngins());
                 header('location:./tableauDeBord.php'); 
             }else {
                 $message = 'une erreur est survenue lors de la suppression';       
     }
-

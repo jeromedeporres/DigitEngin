@@ -23,6 +23,7 @@ include './Controllers/ctrlAjoutEquipement.php';
 		</div>
 	<!--message de succés ou d'erreur-->
 		<p class="formMessage"><?= isset($addEquipementMessage) ? $addEquipementMessage : '' ?></p>
+		
 	<!-- Btn validation -->
 		<button type="submit" name="addEquipements" class="btn btn-primary btn-sm">Valider</button>
 	    <button type="reset" class="btn btn-warning btn-sm">Réinitialiser</button>

@@ -2,7 +2,9 @@
 class anomalies
 {
 	public $id_anomalies = 0;
+    public $id_Engins = 0;
 	public $description = '';
+    public $numeroEngin = '';
     public $imageAnom1 = '';
     public $imageAnom2 = '';
     public $imageAnom3 = '';
@@ -19,22 +21,68 @@ class anomalies
         $checkAnomaliesExist = $this->db->prepare(
             'SELECT COUNT(`id_anomalies`) AS `isAnomaliesExist`
             FROM `anomalies` 
-            WHERE `description` = :description'
+            WHERE `id_anomalies` = :id_anomalies'
         );
-        $checkAnomaliesExist->bindvalue(':description', $this->description, PDO::PARAM_STR);
+        $checkAnomaliesExist->bindvalue(':id_anomalies', $this->id_anomalies, PDO::PARAM_INT);
         $checkAnomaliesExist->execute();
         return $checkAnomaliesExist->fetch(PDO::FETCH_OBJ)->isAnomaliesExist;
     }
+
+    public function getAnomaliesByEngin() {
+        $getAnomaliesByEnginQuery = $this->db->prepare(
+            'SELECT `engins`.`id_Engins`,`anomalies`.`description`, `engins`.`numeroEngin`
+            FROM `anomalies`
+            INNER JOIN `engins` ON `engins`.`id_Engins`= `anomalies`.`id_Engins`
+            WHERE `engins`.`id_Engins` = :id_Engins'
+            );
+            $getAnomaliesByEnginQuery->bindValue(':id_Engins', $this->id_Engins, PDO::PARAM_INT);
+            $getAnomaliesByEnginQuery->execute();
+            return $getAnomaliesByEnginQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
+
 	public function getAnomalies(){
         $getAnomalies = $this->db->prepare(
-            'SELECT `id_anomalies`, `description`,`imageAnom1`,`imageAnom2`,`imageAnom3`
-            FROM `anomalies`'
+            'SELECT  `anomalies`.`id_anomalies`, `anomalies`.`description`, `engins`.`numeroEngin`, `imageAnom1`,`imageAnom2`,`imageAnom3`
+            FROM `engins`
+            INNER JOIN `anomalies` ON `engins`.`id_Engins`= `anomalies`.`id_Engins`;'
         );
         $getAnomalies->execute();
         return $getAnomalies->fetchAll(PDO::FETCH_OBJ);
     }
+
+    /* public function getAnomalie(){
+        $getAnomalie = $this->db->prepare(
+            'SELECT  `description`,  `imageAnom1`,`imageAnom2`,`imageAnom3`
+            FROM `anomalies`
+            INNER JOIN `engins` ON `anomalies`.`id_anomalies` = `engins`.`id_anomalies` 
+            WHERE `id_Engins` = :id_Engins;'
+        );
+        $getAnomalie->bindvalue(':description', $this->description, PDO::PARAM_STR); */
+/*         $getAnomalie->bindvalue(':imageAnom1', $this->imageAnom1, PDO::PARAM_STR);
+        $getAnomalie->bindvalue(':imageAnom2', $this->imageAnom2, PDO::PARAM_STR);
+        $getAnomalie->bindvalue(':imageAnom3', $this->imageAnom3, PDO::PARAM_STR);
+        $getAnomalie->bindvalue(':id_Engins', $this->id_Engins, PDO::PARAM_INT);
+ */ /*        $getAnomalie->execute();
+        return $getAnomalie->fetchAll(PDO::FETCH_OBJ);
+    }
+ */
+
+
+/* 	public function getAnomalies(){
+        $getAnomalies = $this->db->query(
+            'SELECT `id_anomalies`,`description`,`numeroEngin`,`imageAnom1`,`imageAnom2`,`imageAnom3`
+            FROM `anomalies`
+            INNER JOIN `engins` ON `anomalies`.`id_anomalies` = `engins`.`id_Engins`'
+        ); */
+       /*  $getAnomalies->execute(); */
+      /*   return $getAnomalies->fetchAll(PDO::FETCH_OBJ);
+    } */
+
+
 	public function checkidAnomaliesExist(){
-        $checkidAnomaliesExist = $this->db->prepare(
+        $checkidAnomaliesExistQuery = $this->db->prepare(
             'SELECT COUNT(`id_anomalies`) AS `isIdAnomaliesExist`
             FROM `anomalies` 
             WHERE `id_anomalies` = :id_anomalies'
@@ -45,12 +93,13 @@ class anomalies
         return $data->isIdAnomaliesExist;     
     } 
 	public function addAnomalies(){
-     
-            $addAnomaliesQuery = $this->db->prepare(    
-                'INSERT INTO `anomalies` (`description`)
-                VALUES (:description)'
+                 $addAnomaliesQuery = $this->db->prepare(    
+                'INSERT INTO `anomalies` (`description`, `imageAnom1`, `id_Engins`)
+                VALUES (:description, :imageAnom1, :id_Engins)'
             );
             $addAnomaliesQuery->bindvalue(':description', $this->description, PDO::PARAM_STR);
+            $addAnomaliesQuery->bindvalue(':imageAnom1', $this->imageAnom1, PDO::PARAM_STR);
+            $addAnomaliesQuery->bindvalue(':id_Engins', $this->id_Engins, PDO::PARAM_INT);
             return $addAnomaliesQuery->execute();
    
     }

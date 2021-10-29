@@ -30,6 +30,7 @@ class types
         $getType->execute();
         return $getType->fetchAll(PDO::FETCH_OBJ);
     }
+    
 	public function checkIdTypeExist(){
         $checkIdTypeExist = $this->db->prepare(
             'SELECT COUNT(`id_types`) AS `isIdTypeExist`
@@ -55,6 +56,18 @@ class types
             echo $th->getMessage();
         }
     }
+
+    public function getTypesInfo() {
+        $getTypesInfoQuery = $this->db->prepare(
+            'SELECT `id_types`, `nomTypes`
+            FROM `types`
+            WHERE `id_types` = :id_types'
+        );
+        $getTypesInfoQuery->bindValue(':id_types', $this->id_types, PDO::PARAM_INT);
+        $getTypesInfoQuery->execute();
+        return $getTypesInfoQuery->fetch(PDO::FETCH_OBJ);
+    }
+
 	public function modifyType(){
         $modifyTypeQuery = $this->db->prepare(
            'UPDATE `types` 

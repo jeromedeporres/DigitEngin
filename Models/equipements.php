@@ -14,7 +14,7 @@ class equipements
 	}
 	public function checkEquipementsExist(){
         $checkEquipementsExist = $this->db->prepare(
-            'SELECT COUNT(`id_equipements`) AS `isEquipementsExist`
+            'SELECT COUNT(`nomEquipements`) AS `isEquipementsExist`
             FROM `equipements` 
             WHERE `nomEquipements` = :nomEquipements'
         );
@@ -55,6 +55,17 @@ class equipements
             echo $th->getMessage();
         }
     }
+    public function getEquipementsInfo() {
+        $getEquipementsInfoQuery = $this->db->prepare(
+            'SELECT `id_equipements`, `nomEquipements`
+            FROM `equipements`
+            WHERE `id_equipements` = :id_equipements '
+        );
+        $getEquipementsInfoQuery->bindValue(':id_equipements', $this->id_equipements, PDO::PARAM_INT);
+        $getEquipementsInfoQuery->execute();
+        return $getEquipementsInfoQuery->fetch(PDO::FETCH_OBJ);
+    }
+
 	public function modifyEquipements(){
         $modifyEquipementsQuery = $this->db->prepare(
            'UPDATE `equipements` 

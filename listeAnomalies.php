@@ -1,7 +1,6 @@
 <?php
 include 'header.php';
 include './Models/anomalies.php';
-
 include './Controllers/ctrlListeAnomalies.php'; 
 ?>
 <div class="btnListeClients text-center">
@@ -29,12 +28,13 @@ if(isset($_GET['idDelete'])){ ?>
   } ?>
 
 <div class="pl-3 pr-3 tableAnomalies table-responsive">
-<table class="table table-hover" id="csvFormat">
+<table class="table table-hover" id="listeAnomalies">
 <button onclick="exportCSV('xlsx')" type="button" class="btn btn-success btn-sm float-left mb-1">Exporter en format csv</button>
   <thead >
     <tr class="tdbTr">
       <th scope="col">Identifiant</th>
       <th scope="col">Observation</th>
+      <th scope="col">Numéro Engin</th>
 	  <th scope="col">Image 1</th>
 	  <th scope="col">Image 2</th>
 	  <th scope="col">Image 3</th>
@@ -46,6 +46,7 @@ if(isset($_GET['idDelete'])){ ?>
       <tr>
         <td><?= $anomalies->id_anomalies ?></td>
         <td><?= $anomalies->description ?></td>
+        <td><?= $anomalies->numeroEngin ?></td>
 		<td><img id="imgAnomalies" src="<?= $anomalies->imageAnom1?>" alt="ImgAnomalies1" height="30" width="30"></img></td>
 		<td><img id="imgAnomalies" src="<?= $anomalies->imageAnom2?>" alt="ImgAnomalies2" height="30" width="30"></img></td>
 		<td><img id="imgAnomalies" src="<?= $anomalies->imageAnom3?>" alt="ImgAnomalies3" height="30" width="30"></img></td>

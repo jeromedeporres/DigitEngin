@@ -1,8 +1,8 @@
 <?php
 $formErrors = array();
 
-$types = new types();
-$typesListe = $types->getType();
+$engins = new engins();
+$enginsListe = $engins->getEngin();
 
 $statut = new statut();
 $statutListe = $statut->getStatut();

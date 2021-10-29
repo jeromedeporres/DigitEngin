@@ -15,7 +15,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
 </head>
 <body>
     <!-- Header Image -->
@@ -25,5 +25,5 @@
         </header>
     </div>
     <div class="container">
-            <h1 class="text-right titreUtilisateur">Bonjour <strong>Jérome</strong></h1><!-- Affichage de userName de utilisateur -->
+        <h1 class="text-right titreUtilisateur">Bonjour <strong>Jérome</strong></h1><!-- Affichage de userName de utilisateur -->
     </div>

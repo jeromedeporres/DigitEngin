@@ -4,6 +4,7 @@ include './Models/engins.php';
 include './Models/types.php';
 include './Models/equipements.php';
 include './Models/clients.php';
+include './Models/statut.php';
 include './Controllers/ctrlAjoutEngin.php';
 ?>
 <div class="btnAjoutEngin text-center">
@@ -19,10 +20,12 @@ include './Controllers/ctrlAjoutEngin.php';
 
 <div class="formAjoutEngin">
 	<form action="ajoutEngin.php" method="POST" enctype="multipart/form-data"> 
+  <!--message de succés ou d'erreur-->
+  <p class="formMessage"><?= isset($addEnginMessage) ? $addEnginMessage : '' ?></p>
 	<!-- TYPE D'ENGINE -->
   <div class="form-group">
     <label for="typeEngin" id="labelForm">Type d'engin</label>
-    <select id="typeEngin" class="form-control" name="typeEngin">
+    <select id="typeEngin" class="form-control" name="id_types">
       <option selected disabled>Choisissez le Type :</option><?php
       foreach($typesListe as $types){ ?>
       <option value="<?= $types->id_types ?>"><?= $types->id_types . ' . ' . $types->nomTypes ?></option><?php
@@ -41,7 +44,7 @@ include './Controllers/ctrlAjoutEngin.php';
 <!-- EQUIPEMENTS -->
 <div class="form-group">
     <label for="equipements" id="labelForm">Le(s) Equipement(s)</label>
-    <select class="custom-select" multiple id="equipements" name="equipements">
+    <select class="form-control" id="equipements" name="id_equipements">
       <option selected disabled>Choisissez le(s) Equipement(s) :</option><?php
       foreach($equipementsListe as $equipements){ ?>
       <option value="<?= $equipements->id_equipements ?>"><?= $equipements->id_equipements . ' . ' . $equipements->nomEquipements ?></option><?php
@@ -54,13 +57,17 @@ include './Controllers/ctrlAjoutEngin.php';
 <!-- STATUT -->
 <div class="form-group">
     <label for="statut" id="labelForm">Disponibilité</label>
-    <select class="form-control" id="statut" name="statut">
-      <option selected disabled>Choisissez la disponibilité :</option>
-      <option value="oui">Oui</option>
-      <option value="non">Non</option>
-    </select>
+    <select class="form-control" id="statut" name="id_statut">
+    <option selected disabled>Choisissez le statut :</option><?php
+      foreach($statutListe as $statut){ ?>
+      <option value="<?= $statut->id_statut ?>"><?= $statut->id_statut . ' . ' . $statut->nomStatut ?></option><?php
+      } ?>
+       </select>	
     <p class="errorForm"><?= isset($formErrors['statut']) ? $formErrors['statut'] : '' ?></p>
   </div>
+
+
+
   <!-- DERNIER REVISION -->
   <div class="form-group">
     <label for="dernierRevision" id="labelForm">Dernier Revision</label>
@@ -71,7 +78,7 @@ include './Controllers/ctrlAjoutEngin.php';
 
     <!-- PROCHAIN REVISION -->
     <div class="form-group">
-    <label for="prochainRevision" id="labelForm">Dernier Revision</label>
+    <label for="prochainRevision" id="labelForm">Prochain Revision</label>
     <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="prochainRevision" <?= count($formErrors) > 0 ? (isset($formErrors['prochainRevision']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['prochainRevision']) ? $_POST['prochainRevision'] : '' ?>" type="date" name="prochainRevision" />
       <!--message d'erreur-->
       <p class="errorForm"><?= isset($formErrors['prochainRevision']) ? $formErrors['prochainRevision'] : '' ?></p>
@@ -87,7 +94,7 @@ include './Controllers/ctrlAjoutEngin.php';
       <!-- HORAMETRE -->
         <div class="form-group">
     <label for="horametre" id="labelForm">Horamétre</label>
-    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="horametre" <?= count($formErrors) > 0 ? (isset($formErrors['horametre']) ? 'is-invalid' : 'is-valid') : ''?>value="<?= isset($_POST['horametre']) ? $_POST['horametre'] : '' ?>" type="text" name="horametre" />
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="horametre" <?= count($formErrors) > 0 ? (isset($formErrors['horametre']) ? 'is-invalid' : 'is-valid') : ''?>value="<?= isset($_POST['horametre']) ? $_POST['horametre'] : '' ?>" type="number" name="horametre" />
     <small>Ex : 234 H 56 M</small>
     <!--message d'erreur-->
       <p class="errorForm"><?= isset($formErrors['horametre']) ? $formErrors['horametre'] : '' ?></p>
@@ -96,7 +103,7 @@ include './Controllers/ctrlAjoutEngin.php';
   	<!-- CLIENT -->
     <div class="form-group">
     <label for="client" id="labelForm">Client</label>
-    <select id="client" class="form-control" name="client">
+    <select id="client" class="form-control" name="id_Clients">
       <option selected disabled>Choisissez le Client :</option><?php
       foreach($clientsListe as $clients){ ?>
       <option value="<?= $clients->id_Clients ?>"><?= $clients->id_Clients . ' . ' . $clients->nomClients ?></option><?php
@@ -112,21 +119,7 @@ include './Controllers/ctrlAjoutEngin.php';
             <!--message d'erreur-->
             <p class="errorForm"><?= isset($formErrors['image']) ? $formErrors['image'] : '' ?></p>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-	<!--message de succés ou d'erreur-->
-		<p class="formMessage"><?= isset($addEnginMessage) ? $addEnginMessage : '' ?></p>
-	<!-- Btn validation -->
+        	<!-- Btn validation -->
 	<div>	
     <button type="submit" name="addEngin" class="btn btn-primary btn-sm">Valider</button>
     <button type="reset" class="btn btn-warning btn-sm">Réinitialiser</button>

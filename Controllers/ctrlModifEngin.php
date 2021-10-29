@@ -13,12 +13,16 @@ $equipementsListe = $equipements->getEquipements();
 $clients = new clients();
 $clientsListe = $clients->getClients();
 
-if (isset($_POST['addEngin'])) {
-//instancier notre requete de la class engins
+if (isset($_GET ['id_Engins'])) {
     $engins = new engins();
-//verification formulaire pour ajouter un engin
-	/* CTRL TYPES */
-	if(!empty($_POST['id_types'])){
+    $engins ->id_Engins = htmlspecialchars($_GET['id_Engins']);
+    $enginsInfo = $engins->getEnginsInfo();
+}
+if (isset($_POST['modifyEngin'])) {
+
+
+
+    if(!empty($_POST['id_types'])){
         $types->id_types = htmlspecialchars($_POST['id_types']);
         if($types->getType()){
             $engins->id_types = $types->id_types;
@@ -35,8 +39,8 @@ if (isset($_POST['addEngin'])) {
         $formErrors['numeroEngin'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> L\'information n\'est pas renseigné</div>';
     }
 
-
 /* CTRL STATUT */
+
 if(!empty($_POST['id_statut'])){
     $statut->id_statut = htmlspecialchars($_POST['id_statut']);
     if($statut->getStatut()){
@@ -49,6 +53,14 @@ if(!empty($_POST['id_statut'])){
 }
 
 
+
+/* 
+if (!empty($_POST['statut'])) {
+	$engins->statut = $_POST['statut'];
+} else {
+$formErrors['statut'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas sélectionné une option</div>';
+}
+ */
 /* CTRL DERNIER REVISION */
 if (!empty($_POST['dernierRevision'])) {
 	$engins->dernierRevision = $_POST['dernierRevision'];
@@ -136,14 +148,14 @@ if(!empty($_POST['id_Clients'])){
     }
 
     if (empty($formErrors)) {
-        if (!$engins->checkIdEnginsExist()){
-            if($engins->addEngins()){
-               $addEnginMessage = '<div class="alert alert-success" role="alert"><i class="far fa-check-circle"></i> l\'engin a été ajouté.</div>'; 
+        if (0<$engins->checkIdEnginsExist()){
+            if($engins->modifyEnginsInfo()){
+               $modifEnginMessage = '<div class="alert alert-success" role="alert"><i class="far fa-check-circle"></i> l\'engin a été Modifié.</div>'; 
             } else {
-                $addEnginMessage = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Une erreur est survenue.</div>';
+                $modifEnginMessage = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Une erreur est survenue.</div>';
             }
         } else {
-            $addEnginMessage = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> L\'engin existe.</div>';
+            $modifEnginMessage = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> L\'engin n\'existe pas.</div>';
         }
     }
 }

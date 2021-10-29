@@ -14,8 +14,9 @@ body {
 
 /**************************** DATE ET HOURE SUR DEBUT ET FIN POSTE **********************/
 
-.dateHeure {
+#dateheure {
     color: #164194;
+    text-align: center;
 }
 
 
@@ -38,14 +39,12 @@ body {
 #titreAjoutType,
 #titreAjoutClient,
 #titreAjoutEquipement,
-#titreModifEngin,
+#titreModif,
 #titreTdb,
-#titreDebutSession,
+#titreDebutPoste,
 #titreFinSession,
 #titreAjoutAnomalies,
-#titreDebSession,
-#titreModifClient,
-#titreModifEquipement {
+#titreDebSession {
     margin-bottom: 2%;
     font-size: 25px;
     font-weight: bold;
@@ -56,6 +55,8 @@ body {
 
 /****************************** LES FORMULAIRES DE CRUD ******************************/
 
+.formDebutPoste,
+.formAjoutEng,
 .tableClients,
 .tdbPrincipale,
 .tableTypes,
@@ -68,6 +69,7 @@ body {
 
 @media only screen and (max-width: 768px) {
     .formAjoutEng,
+    .formDebutPoste,
     .tableClients,
     .tdbPrincipale,
     .tableTypes,
@@ -86,8 +88,9 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-    .formAjoutEng,
     .formModifEng,
+    .formModifEng,
+    .formModifEquipements,
     .tdb {
         margin-left: 5%;
         margin-right: 7%;
@@ -101,9 +104,33 @@ body {
     margin-top: 3%;
 }
 
-.tri {
-    margin-left: 40%;
-    margin-right: 40%;
+#tri,
+#filter {
+    text-transform: uppercase;
+    border: none;
+    border-bottom: 2px solid #164194;
+}
+
+#labelTri {
+    color: #164194;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.triFiltre {
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .triFiltre {
+        margin-left: 20%;
+        margin-right: 20%;
+        text-align: center;
+        align-items: center;
+    }
 }
 
 #btnCsv {
@@ -124,8 +151,8 @@ body {
 .btnAjoutClient>a,
 .btnAjoutType>a,
 .btnAjoutEngin>a,
-.btnDebSession>a,
-.btnModifClient>a,
+.btnDebutPoste>a,
+.btnModif>a,
 .btnListeTypes>a,
 .btnListeEquipements>a {
     margin: 1%;
@@ -145,10 +172,11 @@ footer {
 /**************************** FORMULAIRES A AJOUTER **********************/
 
 .formAjoutClient,
+.formDebutPoste,
 .formAjoutEquipement,
 .formAjoutType,
 .formAjoutEngin,
-.formModifClient,
+.formModif,
 .formAjoutAnomalies {
     border-radius: 20px;
     padding: 40px;
@@ -164,8 +192,7 @@ footer {
 
 input[type=text],
 input[type=number],
-input[type=date],
-textarea[type=text] {
+input[type=date] {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -175,10 +202,12 @@ textarea[type=text] {
 
 @media only screen and (max-width: 768px) {
     .formAjoutClient,
+    .formDebutPoste,
     .formAjoutEquipement,
     .formAjoutType,
     .formAjoutEngin,
     .formModifClient,
+    .formModifEquipements,
     .formAjoutAnomalies {
         margin: 5%;
         margin-bottom: 25%;
@@ -194,7 +223,8 @@ textarea[type=text] {
 
 /**************************** MODAL BS DES ANOMALIES **********************/
 
-#imgAnomalies {
+#imgAnomalies,
+#imageEngin {
     padding: 20px;
     width: 100px;
     height: 100px;
@@ -208,14 +238,25 @@ textarea[type=text] {
 
 /**************************** ALERT BS DE SUPPRESSION **********************/
 
-.alert {
-    display: inline-block;
-    margin-left: 30%;
-    margin-right: 30%;
+
+/* .alert {
+display: inline-block;
+margin-left: 30%;
+margin-right: 30%;
+text-align: center;
 }
+*/
 
 @media only screen and (max-width: 768px) {
     .alert {
         margin: 0;
     }
+}
+
+#counter {
+    color: #164194;
+    font-weight: bold;
+    font-size: 13px;
+    font-style: italic;
+    margin: 1%;
 }

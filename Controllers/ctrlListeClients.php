@@ -12,7 +12,7 @@ if(isset($_POST['sendSearch'])){
         $listeClients = $clients->searchCatListByName($search);
     }
 }else{
-    $listeClients = $clients->getClient();
+    $listeClients = $clients->getClients();
     $resultsNumber = count($listeClients);
     $searchMessage = 'Il y a ' . $resultsNumber . ' clients';
     $link = 'listeClients.php?';
