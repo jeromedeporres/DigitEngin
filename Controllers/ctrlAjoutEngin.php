@@ -93,16 +93,12 @@ if(!empty($_POST['id_Clients'])){
 
 
 	/* CTRL EQUIPEMENTS */
-	if(!empty($_POST['id_equipements'])){
-		$equipements->id_equipements = htmlspecialchars($_POST['id_equipements']);
-		if($equipements->getEquipements()){
-			$engins->id_equipements = $equipements->id_equipements;
-		}else {
-			$formErrors['id_equipements'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Une erreur s\'est produite</div>';
-		}
-	}else {
-		$formErrors['id_equipements'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas sélectionné un equipement</div>';
-	}
+
+    if (!empty($_POST['nomEquipements'])) {
+        $engins->nomEquipements = htmlspecialchars($_POST['nomEquipements']);
+    } else {
+        $formErrors['nomEquipements'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> L\'information n\'est pas renseigné</div>';
+    }
 
 	/* IMAGE */
     if (!empty($_FILES['image']) && $_FILES['image']['error'] == 0) {

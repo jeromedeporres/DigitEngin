@@ -128,9 +128,8 @@ if(isset($_GET['idDelete'])){ ?>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                   <div class="modal-body">
-                  <?php foreach ($anomaliesParEngins as $enginsParAnomalies){
-                  $enginsParAnomalies->description ?>
-                  <?php }?>
+                  <p><?php $EnginsListe->nomEquipements?></p>
+         
                   </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -138,7 +137,7 @@ if(isset($_GET['idDelete'])){ ?>
               </div>
             </div>
           </div>
-<td><?= $EnginsListe->id_Engins ?></td>
+        <td><?= $EnginsListe->id_Engins ?></td>
         <td><?= $EnginsListe->nomTypes ?></td>
         <td><a data-toggle="modal" data-target="#exampleModal"><?= $EnginsListe->numeroEngin ?> </a></td>
         <td><?= $EnginsListe->dernierRevision ?></td>

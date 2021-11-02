@@ -42,17 +42,14 @@ include './Controllers/ctrlAjoutEngin.php';
       <p class="errorForm"><?= isset($formErrors['numeroEngin']) ? $formErrors['numeroEngin'] : '' ?></p>
   </div>
 <!-- EQUIPEMENTS -->
+
 <div class="form-group">
     <label for="equipements" id="labelForm">Le(s) Equipement(s)</label>
-    <select class="form-control" id="equipements" name="id_equipements">
-      <option selected disabled>Choisissez le(s) Equipement(s) :</option><?php
-      foreach($equipementsListe as $equipements){ ?>
-      <option value="<?= $equipements->id_equipements ?>"><?= $equipements->id_equipements . ' . ' . $equipements->nomEquipements ?></option><?php
-      } ?>
-       </select>	
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="nomEquipements" <?= count($formErrors) > 0 ? (isset($formErrors['nomEquipements']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['nomEquipements']) ? $_POST['nomEquipements'] : '' ?>" type="text" name="nomEquipements" />
+    <small>Veuillez séparer par une virgule / Ex : TE,IMP,DOU</small>
     <!--message d'erreur-->
-    <p class="errorForm"><?= isset($formErrors['id_equipements']) ? $formErrors['id_equipements'] : '' ?></p>
-</div>
+      <p class="errorForm"><?= isset($formErrors['nomEquipements']) ? $formErrors['nomEquipements'] : '' ?></p>
+  </div>
 
 <!-- STATUT -->
 <div class="form-group">

@@ -2,11 +2,11 @@
 include 'header.php';
 include './Models/engins.php';
 include './Models/statut.php';
-include './Models/debPoste.php';
-include './Controllers/ctrlDebutPoste.php';
+include './Models/finPoste.php';
+include './Controllers/ctrlFinPoste.php';
 
 ?>
-<div class="btnDebutPoste text-center">
+<div class="btnFinPoste text-center">
   <a class="btn btn-outline-primary btn-sm" href="index.php"><i class="fas fa-home fa-2x"></i> Accueil</a>
 <!-- Btn CRUD -->
 	<a class="btn btn-outline-primary btn-sm" href="tableauDeBord.php"><i class="fas fa-tachometer-alt fa-2x"></i> Tableau De Bord</a>
@@ -15,16 +15,16 @@ include './Controllers/ctrlDebutPoste.php';
 
 <!-- Début Formulaire -->
 <!-- Titre Formulaire -->
- <h1 class="text-center mt-3" id="titreDebutPoste">Début Du Poste</h1>
-<div class="formDebutPoste">
-	<form action="debutPoste.php" method="POST" enctype="multipart/form-data"> 
+ <h1 class="text-center mt-3" id="titreFinPoste">Fin Du Poste</h1>
+<div class="formFinPoste">
+	<form action="finPoste.php" method="POST" enctype="multipart/form-data"> 
   <!--message de succés ou d'erreur-->
-  <p class="formMessage"><?= isset($addDebutPoste) ? $addDebutPoste : '' ?></p>
+  <p class="formMessage"><?= isset($addFinPoste) ? $addFinPoste : '' ?></p>
 
     <!-- DATE L'HEURE -->
 	<div class="form-group">
 		<label for="dateHeure" id="labelForm">L'heure</label>
- 		<input class="form-control" id="dateHeure" value="<?php echo date("H:i"); ?>" type="time" name="debutPoste" />
+    <input class="form-control" id="dateHeure" value="<?php echo date("H:i"); ?>" type="time" name="finPoste" />
 	</div>
 
 	<!-- ENGINE -->
@@ -42,7 +42,7 @@ include './Controllers/ctrlDebutPoste.php';
 
   <!-- Btn validation -->
 	<div>	
-		<button type="submit" name="addDebutPoste" class="btn btn-primary btn-sm">Valider</button>
+		<button type="submit" name="addFinPoste" class="btn btn-primary btn-sm">Valider</button>
 		<button type="reset" class="btn btn-warning btn-sm">Réinitialiser</button>
 	</div>
   </form>

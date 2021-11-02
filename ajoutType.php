@@ -18,7 +18,7 @@ include './Controllers/ctrlAjoutType.php';
 		<div class="form-group">
 			<label for="nomTypes" id="labelForm">Nom de Type d'engin</label>
 			<input oninput="this.value = this.value.toUpperCase()" class="form-control" id="nomTypes" <?= count($formErrors) > 0 ? (isset($formErrors['nomTypes']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['nomTypes']) ? $_POST['nomTypes'] : '' ?>" type="text" name="nomTypes" />
-			<small id="help" class="form-text text-muted">Entrez un nouveau engin</small>
+			<small id="help" class="form-text text-muted">Entrez un nouveau type</small>
 		</div>
 	<!--message de succés ou d'erreur-->
 		<p class="formMessage"><?= isset($addTypesMessage) ? $addTypesMessage : '' ?></p>

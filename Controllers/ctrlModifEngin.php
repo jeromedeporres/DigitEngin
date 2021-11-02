@@ -20,8 +20,6 @@ if (isset($_GET ['id_Engins'])) {
 }
 if (isset($_POST['modifyEngin'])) {
 
-
-
     if(!empty($_POST['id_types'])){
         $types->id_types = htmlspecialchars($_POST['id_types']);
         if($types->getType()){
@@ -52,15 +50,6 @@ if(!empty($_POST['id_statut'])){
     $formErrors['id_statut'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas sélectionné un Statut d\'engin</div>';
 }
 
-
-
-/* 
-if (!empty($_POST['statut'])) {
-	$engins->statut = $_POST['statut'];
-} else {
-$formErrors['statut'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas sélectionné une option</div>';
-}
- */
 /* CTRL DERNIER REVISION */
 if (!empty($_POST['dernierRevision'])) {
 	$engins->dernierRevision = $_POST['dernierRevision'];
@@ -105,6 +94,14 @@ if(!empty($_POST['id_Clients'])){
 
 
 	/* CTRL EQUIPEMENTS */
+
+    if (!empty($_POST['nomEquipements'])) {
+        $engins->nomEquipements = $_POST['nomEquipements'];
+    } else {
+    $formErrors['nomEquipements'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas renseigné un Equipement</div>';
+    }
+
+
 	if(!empty($_POST['id_equipements'])){
 		$equipements->id_equipements = htmlspecialchars($_POST['id_equipements']);
 		if($equipements->getEquipements()){

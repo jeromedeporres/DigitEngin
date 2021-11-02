@@ -115,13 +115,13 @@ function display_ct() {
 
 
 
-$(document).ready(function() {
+/* $(document).ready(function() {
     var multiChoix = new Choices('#equipements', {
         removeItemButton: true
 
     });
 });
-
+ */
 /* DATE ET L'HEURE */
 
 document.getElementById('dateHeure').value = new Date().toDateInputValue();

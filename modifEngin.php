@@ -29,10 +29,8 @@ include './Controllers/ctrlModifEngin.php';
     <label for="typeEngin" id="labelForm">Type d'engin</label>
     <select id="typeEngin" class="form-control" name="id_types">
       <option disabled>Choisissez le Type :</option><?php
-      /* $row = $enginsInfo->id_types; */
       /* Récupere l'item sélectionné */
       $selected = $enginsInfo->id_types;
-      /* $selectedTypes = $selected->id_types; */
       foreach($typesListe as $types){ ?>
       <option value="<?= $types->id_types?> " <?= ($types->id_types == $selected)? 'selected': '' ?>><?= $types->id_types . ' . ' . $types->nomTypes?></option><?php
       } ?>
@@ -50,18 +48,10 @@ include './Controllers/ctrlModifEngin.php';
 <!-- EQUIPEMENTS -->
 <div class="form-group">
     <label for="equipements" id="labelForm">Le(s) Equipement(s)</label>
-    <select class="form-control" id="equipements" name="id_equipements">
-      <option disabled>Choisissez le(s) Equipement(s) :</option><?php
-      /* Récupere l'item sélectionné */
-      $equipementsSelected = $enginsInfo->id_equipements;
-      /* $selectedEquipements = $equipementsSelected->id_equipements; */
-      foreach($equipementsListe as $equipements){ ?>
-      <option value="<?= $equipements->id_equipements ?>"<?= ($equipements->id_equipements == $equipementsSelected)? "selected": "" ?>><?= $equipements->id_equipements . ' . ' . $equipements->nomEquipements ?></option><?php
-      } ?>
-       </select>	
-    <!--message d'erreur-->
-    <p class="errorForm"><?= isset($formErrors['id_equipements']) ? $formErrors['id_equipements'] : '' ?></p>
-</div>
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="nomEquipements" <?= count($formErrors) > 0 ? (isset($formErrors['nomEquipements']) ? 'is-invalid' : 'is-valid') : '' ?>value="<?= isset($_POST['nomEquipements']) ? $_POST['nomEquipements'] : $enginsInfo->nomEquipements ?>" type="text" name="nomEquipements" />
+      <!--message d'erreur-->
+      <p class="errorForm"><?= isset($formErrors['nomEquipements']) ? $formErrors['nomEquipements'] : '' ?></p>
+  </div>
 
 <!-- STATUT -->
 
@@ -104,7 +94,7 @@ include './Controllers/ctrlModifEngin.php';
       <!-- HORAMETRE -->
         <div class="form-group">
     <label for="horametre" id="labelForm">Horamétre</label>
-    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="horametre" <?= count($formErrors) > 0 ? (isset($formErrors['horametre']) ? 'is-invalid' : 'is-valid') : ''?>value="<?= isset($_POST['horametre']) ? $_POST['horametre'] : $enginsInfo->horametre?>" type="number" name="horametre" />
+    <input oninput="this.value = this.value.toUpperCase()" class="form-control" id="horametre" <?= count($formErrors) > 0 ? (isset($formErrors['horametre']) ? 'is-invalid' : 'is-valid') : ''?>value="<?= isset($_POST['horametre']) ? $_POST['horametre'] : $enginsInfo->horametre?>" type="time" name="horametre" />
     <small>Ex : 234 H 56 M</small>
     <!--message d'erreur-->
       <p class="errorForm"><?= isset($formErrors['horametre']) ? $formErrors['horametre'] : '' ?></p>
@@ -116,7 +106,6 @@ include './Controllers/ctrlModifEngin.php';
     <select id="client" class="form-control" name="id_Clients">
       <option disabled>Choisissez le Client :</option><?php
       /* Récupere l'item sélectionné */
-      /* $clientSelected = $clients->getClients(); */
       $selectedClient = $enginsInfo->id_Clients;
       foreach($clientsListe as $clients){ ?>
       <option value="<?= $clients->id_Clients ?>"<?= ($clients->id_Clients == $selectedClient)? "selected": "" ?>><?= $clients->id_Clients . ' . ' . $clients->nomClients ?></option><?php

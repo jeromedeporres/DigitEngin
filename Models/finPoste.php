@@ -51,12 +51,11 @@ while($row = mysqli_fetch_array($resultat)) {
 
 echo "<div class='form-group'>";
 echo "<p id='labelForm'>Image d'anomalie existant</p>";
-echo "<img src='$row[imageObservation]' alt='imageObservation' width='100' height='100'>";
-
+echo "<img src='$row[imageObservation]' alt='' id='imgObs' width='100' height='100'> ";
 
 echo "<div class='form-group'>";
 echo "<label for='imageObservation' id='labelForm'>Image d'une Anomalie</label>";
-echo "<input id='imageObservation' class='form-control type='file' name='imageObservation' value='$row[imageObservation]'/>";
+echo "<input id='imageObservation' class='form-control value='$row[imageObservation]' type='file' name='imageObservation' />";
 
 }
 mysqli_close($connexion);

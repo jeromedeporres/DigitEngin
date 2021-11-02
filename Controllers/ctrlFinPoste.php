@@ -9,19 +9,20 @@ if (isset($_POST['id_Engins'])) {
     $enginsInfo = $engins->getEnginsInfo();
 }
 
-if (isset($_POST['addDebutPoste'])) {
+if (isset($_POST['addFinPoste'])) {
 
-/* NUMERO ENGIN */
-if (!empty(['numeroEngin'])) {
-    $engins->numeroEngin = htmlspecialchars($enginsInfo->numeroEngin);
+    /* NUMERO ENGIN */
+    if (!empty(['numeroEngin'])) {
+         $engins->numeroEngin = htmlspecialchars($enginsInfo->numeroEngin);
+     } else {
+        $formErrors['numeroEngin'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> L\'information n\'est pas renseigné</div>';
+    } 
+ 
+/* L'HEURE */
+if (!empty($_POST['finPoste'])) {
+	$engins->finPoste = $_POST['finPoste'];
 } else {
-    $formErrors['numeroEngin'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> L\'information n\'est pas renseigné</div>';
-} 
-
-if (!empty($_POST['debutPoste'])) {
-	$engins->debutPoste = $_POST['debutPoste'];
-} else {
-$formErrors['debutPoste'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas renseigné le kilométrage</div>';
+$formErrors['finPoste'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas renseigné le kilométrage</div>';
 }
 
 /* CTRL KM REEL */
@@ -45,7 +46,8 @@ if (!empty($_POST['observation'])) {
 $formErrors['observation'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas renseigné l\'observation</div>';
 }
 
-	/* IMAGE */
+
+/* IMAGE */
     if (!empty($_FILES['imageObservation']) && $_FILES['imageObservation']['error'] == 0) {
         // On stock dans $fileInfos les informations concernant le chemin du fichier.
         $fileInfos = pathinfo($_FILES['imageObservation']['name']);
@@ -76,15 +78,17 @@ $formErrors['observation'] = '<div class="alert alert-danger" role="alert"><i cl
         $formErrors['imageObservation'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Veuillez selectionner un fichier</div>';
     }
 
- if (empty($formErrors)) { 
+    if (empty($formErrors)) { 
     if ($engins->checkIdEnginsExist() > 0 ){ 
-            if($engins->addDebutPoste()){
-               $addDebutPoste = '<div class="alert alert-success" role="alert"><i class="far fa-check-circle"></i> Les informations à bien été ajouté.</div>'; 
+            if($engins->addFinPoste()){
+				if($engins->modifyHorametre()){
+               $addFinPoste = '<div class="alert alert-success" role="alert"><i class="far fa-check-circle"></i> Les informations à bien été ajouté.</div>'; 
             } else {
-                $addDebutPoste = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Une erreur est survenue.</div>';
+                $addFinPoste = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Une erreur est survenue.</div>';
             }
-      }  else {
+		}
+       }  else {
             $addDebutPoste = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> L\'engin existe.</div>';
-        } 
+        }  
      } 
 }
