@@ -24,7 +24,7 @@ include './Controllers/ctrlFinPoste.php';
     <!-- DATE L'HEURE -->
 	<div class="form-group">
 		<label for="dateHeure" id="labelForm">L'heure</label>
-    <input class="form-control" id="dateHeure" value="<?php echo date("H:i"); ?>" type="time" name="finPoste" />
+    <input class="form-control" id="dateHeure" value="<?php echo date("Y-m-d\TH:i"); ?>" type="datetime-local" name="finPoste" />
 	</div>
 
 	<!-- ENGINE -->

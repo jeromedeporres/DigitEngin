@@ -117,7 +117,7 @@ include './Controllers/ctrlModifEngin.php';
 <!-- IMAGE -->
   <div class="form-group">
             <label for="image" id="labelForm">Image</label>
-            <input id="image" class="form-control <?= count($formErrors) > 0 ? (isset($formErrors['image']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= isset($_POST['image']) ? $_POST['image'] : $enginsInfo->image?>" type="file" name="image" />
+            <input id="image" class="form-control <?= count($formErrors) > 0 ? (isset($formErrors['image']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= isset($_POST['image']) ? $_POST['image'] : $enginsInfo->image?>" type="file" name="image"  />
             <!--message d'erreur-->
             <p class="errorForm"><?= isset($formErrors['image']) ? $formErrors['image'] : '' ?></p>
         </div>

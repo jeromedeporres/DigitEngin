@@ -118,7 +118,7 @@ if(isset($_GET['idDelete'])){ ?>
   <tbody id="FiltreTable">
     <?php foreach ($listeEngins as $EnginsListe){ ?>
       <tr
-       <?php if($EnginsListe->nomStatut == "Disponible") : ?> style="background-color:#A4FF7F;" <?php else : ?> style="background-color:#ff726f;" <?php endif ?>>
+       <?php if($EnginsListe->nomStatut == "Disponible") : ?> style="background-color:#90EE90;" <?php else : ?> style="background-color:#FF7F7F;" <?php endif ?>>
         <!-- Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="#exampleModal" aria-hidden="true">
             <div class="modal-dialog">
@@ -147,7 +147,7 @@ if(isset($_GET['idDelete'])){ ?>
         <td><?= $EnginsListe->horametre?></td>
         <td><?= $EnginsListe->km_reel ?></td>
         <td><?= $EnginsListe->nomClients ?></td>
-        <td><img id="imageEngin" src="<?= $EnginsListe->image?>" alt="imageEngin"/></td>
+        <td><img id="imageEngin" src="<?= $EnginsListe->image?>" alt="imageEngin" /></td>
         <td> <a href="modifEngin.php?&id_Engins=<?= $EnginsListe->id_Engins ?>"><i class="fas fa-edit"></i></a>
             <a href="tableauDeBord.php?&idDelete=<?= $EnginsListe->id_Engins ?>"><i class="far fa-trash-alt"></i></a></td>
       </tr><?php }

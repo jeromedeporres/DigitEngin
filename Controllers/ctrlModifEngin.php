@@ -101,20 +101,8 @@ if(!empty($_POST['id_Clients'])){
     $formErrors['nomEquipements'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas renseigné un Equipement</div>';
     }
 
-
-	if(!empty($_POST['id_equipements'])){
-		$equipements->id_equipements = htmlspecialchars($_POST['id_equipements']);
-		if($equipements->getEquipements()){
-			$engins->id_equipements = $equipements->id_equipements;
-		}else {
-			$formErrors['id_equipements'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Une erreur s\'est produite</div>';
-		}
-	}else {
-		$formErrors['id_equipements'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Vous n\'avez pas sélectionné un equipement</div>';
-	}
-
 	/* IMAGE */
-    if (!empty($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    if ($_FILES['image']['error'] == 0) {
         // On stock dans $fileInfos les informations concernant le chemin du fichier.
         $fileInfos = pathinfo($_FILES['image']['name']);
         // On crée un tableau contenant les extensions autorisées.

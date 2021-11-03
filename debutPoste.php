@@ -24,7 +24,7 @@ include './Controllers/ctrlDebutPoste.php';
     <!-- DATE L'HEURE -->
 	<div class="form-group">
 		<label for="dateHeure" id="labelForm">L'heure</label>
- 		<input class="form-control" id="dateHeure" value="<?php echo date("H:i"); ?>" type="time" name="debutPoste" />
+ 		<input class="form-control" id="dateHeure" value="<?php echo date("Y-m-d\TH:i"); ?>" type="datetime-local" name="debutPoste" />
 	</div>
 
 	<!-- ENGINE -->
@@ -51,5 +51,5 @@ include './Controllers/ctrlDebutPoste.php';
 
 <!-- Affichage de Footer -->
 <?php
-  include 'footer.php'
+  include 'footer.php';
 ?>

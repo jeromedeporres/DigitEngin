@@ -198,7 +198,7 @@ public function getEnginsList($orderBy) {
     public function modifyEnginsInfo(){
         $modifyEnginsInfoQuery = $this->db->prepare(
            'UPDATE `engins` 
-           SET  /* `id_Engins` = :id_Engins,  */
+           SET  /*  `id_Engins` = :id_Engins, */
            `numeroEngin` = :numeroEngin, 
         /*    `id_equipements` = :id_equipements,  */
            `id_statut` = :id_statut,
@@ -272,9 +272,9 @@ public function getEnginsList($orderBy) {
 
     public function modifyHorametre(){
         $modifyHorametreQuery = $this->db->prepare(
-            'UPDATE `engins`
-            SET `horametre` = (`finPoste` - `debutPoste`)
-            WHERE `id_Engins` = :id_Engins'
+        'UPDATE engins
+        SET horametre = horametre + TIMEDIFF(finPoste , debutPoste)
+        WHERE id_Engins = :id_Engins'
         );
         $modifyHorametreQuery->bindvalue(':id_Engins', $this->id_Engins, PDO::PARAM_INT); 
         return $modifyHorametreQuery->execute();
