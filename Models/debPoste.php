@@ -43,20 +43,22 @@ while($row = mysqli_fetch_array($resultat)) {
   echo "<div class='form-group'>";
   echo "<label for='observation' id='labelForm'>Observation</label>";
   if ($row['nomStatut'] == 'Disponible') {
-  echo "<textarea onkeyup='textCounter(this,'counter','300');' class='form-control text-center' maxlength='300' name='observation'>$row[observation]</textarea>";
-  echo "<input disabled maxlength='300' size='22' value='Maximum 300 Caractères.' id='counter'/>";
- } else{
+  echo "<textarea class='form-control text-center' maxlength='300' name='observation'>$row[observation]</textarea>";
+  echo "<p>Veuillez séparer par une virgule / Ex : Observation1, Observation2 etc...</p>"; 
+} else{
   echo "<input disabled class='form-control text-center' name='observation' value ='$row[observation]'/>";
 }
 
 echo "<div class='form-group'>";
-echo "<p id='labelForm'>Image d'anomalie existant</p>";
-echo "<img src='$row[imageObservation]' alt='imageObservation' width='100' height='100'>";
+if ($row['imageObservation'] == true) {
+  echo "<p id='labelForm'>Image d'anomalie existant</p>";
+  echo "<img src='$row[imageObservation]' alt='imageObservation' width='100' height='100'>";
+}
 
 
 echo "<div class='form-group'>";
-echo "<label for='imageObservation' id='labelForm'>Image d'une Anomalie</label>";
-echo "<input id='imageObservation' class='form-control value='$row[imageObservation]' type='file' name='imageObservation' />";
+echo "<label for='imageObservation' id='labelForm'>Ajouter une image d'Anomalie</label>";
+echo "<input id='imageObservation' class='form-control value='$row[imageObservation]' type='file' name='imageObservation'/>";
 
 }
 mysqli_close($connexion);

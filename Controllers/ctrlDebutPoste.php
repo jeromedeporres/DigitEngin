@@ -73,8 +73,9 @@ $formErrors['observation'] = '<div class="alert alert-danger" role="alert"><i cl
           $formErrors['imageObservation'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Votre fichier n\'est pas du format attendu</div>';
         }
     }else {
-        $formErrors['imageObservation'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Veuillez selectionner un fichier</div>';
-    }
+/*         $formErrors['imageObservation'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Veuillez selectionner un fichier</div>';
+ */        $engins->imageObservation = $enginsInfo->imageObservation;
+      }
 
  if (empty($formErrors)) { 
     if ($engins->checkIdEnginsExist() > 0 ){ 

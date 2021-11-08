@@ -7,7 +7,6 @@ include './Controllers/ctrlAjoutEquipement.php';
     <a class="btn btn-outline-primary btn-sm" href="index.php"><i class="fas fa-home fa-2x"></i> Accueil</a>
     	<!-- Btn CRUD -->
 	<a class="btn btn-outline-primary btn-sm" href="tableauDeBord.php"><i class="fas fa-tachometer-alt fa-2x"></i> Tableau De Bord</a>
-    <a class="btn btn-outline-danger btn-sm" href="index.php"><i class="fas fa-sign-out-alt fa-2x"></i> Déconnexion</a>
 </div>
 
 <!-- Début Formulaire -->

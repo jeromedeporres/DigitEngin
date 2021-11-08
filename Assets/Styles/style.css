@@ -22,17 +22,38 @@ body {
 
 /**************************** IMAGE LOGO **********************/
 
-.header {
-    height: 150px;
-    width: 350px;
+.imgLogo {
+    width: 500px;
+    height: 500px;
+    /* position: absolute; */
+    z-index: -1;
 }
+
+.infoIndex {
+    color: #164194;
+    text-align: center;
+    margin-top: 1%;
+}
+
+.imgHeader {
+    border-radius: 15px;
+}
+
+
+/* @media only screen and (max-width: 768px) {
+    .headerText {
+        color: #164194;
+        text-align: center;
+    }
+}
+ */
 
 
 /****************************** TITRES LES PAGES ******************************/
 
 .titreUtilisateur {
     color: #164194;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 #titreAjoutEngin,
@@ -194,6 +215,8 @@ footer {
 }
 
 input[type=text],
+input[type=email],
+input[type=password],
 input[type=number],
 input[type=date] {
     padding: 12px 20px;

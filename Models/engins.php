@@ -7,10 +7,10 @@ class engins
 	public $id_equipements  = 0;
 	public $dernierRevision = '';
 	public $km_reel = '';
-	public $heure_jour = '';
 	public $horametre = '';
 	public $prochainRevision = '';
 	public $id_Clients  = '';
+    public $id_types  = '';
     public $nomClients = '';
     public $description = '';
     public $id_statut = 0;
@@ -19,15 +19,11 @@ class engins
     public $imageObservation = '';
     public $debutPoste = '';
     public $finPoste = '';
+    public $image = '';
    	private $db = null;
-	public function __construct()
-	{
-		try {
-            $this->db = new PDO('mysql:host=localhost;dbname=digit_engin;charset=utf8', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        } catch (Exception $error) {
-            die($error->getMessage());
-        }
-	}
+	public function __construct(){
+        $this->db = dataBase::getInstance();
+    }
 
     public function getEngin(){
         $getEngin = $this->db->prepare(
@@ -50,7 +46,7 @@ class engins
 
 	public function getEnginsByClients() {
         $getEnginsByClientsQuery = $this->db->prepare(
-            'SELECT `id_Engins`,  `id_Types`, `numeroEngin`,/* `id_equipements`, */ `id_statut`,`dernierRevision`, `km_reel` , `heure_jour`, `horametre`, `prochainRevision`,`id_Clients`,`image`
+            'SELECT `id_Engins`,  `id_Types`, `numeroEngin`,/* `id_equipements`, */ `id_statut`,`dernierRevision`, `km_reel` , /* `heure_jour`, */ `horametre`, `prochainRevision`,`id_Clients`,`image`
             FROM `engins`
             WHERE `id_Engins` = :id_Engins'
             );
@@ -102,15 +98,15 @@ public function addEngins(){
 // Marqueur nominatif
 //bindValue: vérifie le type et que ça ne génère pas de faille de sécurité.
 //$this-> : permet d'acceder aux attributs de l'instance qui est en cours
-			'INSERT INTO `engins` ( `numeroEngin`,`nomEquipements`, `id_statut`,`dernierRevision`, `km_reel` , `heure_jour`, `horametre`, `prochainRevision`,`id_Clients`,`image`,`id_types`)
-        VALUES( :numeroEngin, :nomEquipements, :id_statut,:dernierRevision, :km_reel, :heure_jour, :horametre, :prochainRevision, :id_Clients, :image,:id_types)'
+			'INSERT INTO `engins` ( `numeroEngin`,`nomEquipements`, `id_statut`,`dernierRevision`, `km_reel` , /* `heure_jour`, */ `horametre`, `prochainRevision`,`id_Clients`,`image`,`id_types`)
+        VALUES( :numeroEngin, :nomEquipements, :id_statut,:dernierRevision, :km_reel, /* :heure_jour, */ :horametre, :prochainRevision, :id_Clients, :image,:id_types)'
         );
         $addEnginsQuery->bindvalue(':numeroEngin', $this->numeroEngin, PDO::PARAM_STR);
         $addEnginsQuery->bindvalue(':nomEquipements', $this->nomEquipements, PDO::PARAM_STR);
 		$addEnginsQuery->bindvalue(':id_statut', $this->id_statut, PDO::PARAM_INT);
         $addEnginsQuery->bindvalue(':dernierRevision', $this->dernierRevision, PDO::PARAM_STR);
         $addEnginsQuery->bindvalue(':km_reel', $this->km_reel, PDO::PARAM_INT);
-		$addEnginsQuery->bindvalue(':heure_jour', $this->heure_jour, PDO::PARAM_STR);
+		/* $addEnginsQuery->bindvalue(':heure_jour', $this->heure_jour, PDO::PARAM_STR); */
 		$addEnginsQuery->bindvalue(':horametre', $this->horametre, PDO::PARAM_INT);
 		$addEnginsQuery->bindvalue(':prochainRevision', $this->prochainRevision, PDO::PARAM_STR);
 		$addEnginsQuery->bindvalue(':id_Clients', $this->id_Clients, PDO::PARAM_INT);
@@ -153,7 +149,7 @@ public function getEnginsList($orderBy) {
         INNER JOIN `anomalies` ON `engins`.`id_Engins`= `anomalies`.`id_Engins`
         ORDER BY '.$orderBy.' ;'  */
 
-        'SELECT TIME_FORMAT(horametre,"%H:%i") AS horametre, `engins`.`id_Engins`, `nomTypes`, `nomClients` , `numeroEngin`,`nomEquipements`,  /*  `anomalies`.`description`, `ImageAnom1` ,`ImageAnom2`, `ImageAnom3`,  */`nomStatut`,`dernierRevision`, `km_reel` , `heure_jour`,  `prochainRevision`,`image`, `engins`.`id_types` 
+        'SELECT TIME_FORMAT(horametre,"%H:%i") AS horametre, `engins`.`id_Engins`, `nomTypes`, `nomClients` , `numeroEngin`,`nomEquipements`,  /*  `anomalies`.`description`, `ImageAnom1` ,`ImageAnom2`, `ImageAnom3`,  */`nomStatut`,`dernierRevision`, `km_reel` , /* `heure_jour`, */  `prochainRevision`,`image`, `engins`.`id_types` 
         FROM `engins` 
      JOIN `clients`
      JOIN `types` 
@@ -187,7 +183,7 @@ public function getEnginsList($orderBy) {
 
        public function getEnginsInfo() {
         $getEnginsInfoQuery = $this->db->prepare(
-            'SELECT `id_types`, `numeroEngin`, `nomEquipements`,`imageObservation`, `debutPoste`, `finPoste`, `id_statut`,`dernierRevision`, `km_reel` , `heure_jour`, `horametre`, `prochainRevision`,`id_Clients`, `engins`.`image`
+            'SELECT `id_types`, `numeroEngin`, `nomEquipements`,`imageObservation`, `debutPoste`, `finPoste`, `id_statut`,`dernierRevision`, `km_reel` , /* `heure_jour`, */ `horametre`, `prochainRevision`,`id_Clients`, `engins`.`image`
             FROM `engins`
             WHERE `id_Engins` = :id_Engins'
         );
@@ -198,8 +194,7 @@ public function getEnginsList($orderBy) {
     public function modifyEnginsInfo(){
         $modifyEnginsInfoQuery = $this->db->prepare(
            'UPDATE `engins` 
-           SET  /*  `id_Engins` = :id_Engins, */
-           `numeroEngin` = :numeroEngin, 
+           SET `numeroEngin` = :numeroEngin, 
         /*    `id_equipements` = :id_equipements,  */
            `id_statut` = :id_statut,
            `dernierRevision` = :dernierRevision, 
@@ -210,7 +205,7 @@ public function getEnginsList($orderBy) {
            `id_Clients` = :id_Clients,
            `image` = :image,
            `id_types` = :id_types
-           WHERE `id_Engins` = :id_Engins'
+            WHERE `id_Engins` = :id_Engins'
         );
         $modifyEnginsInfoQuery->bindvalue(':id_Engins', $this->id_Engins, PDO::PARAM_INT);
         $modifyEnginsInfoQuery->bindvalue(':numeroEngin', $this->numeroEngin, PDO::PARAM_STR);
@@ -226,6 +221,8 @@ public function getEnginsList($orderBy) {
         $modifyEnginsInfoQuery->bindvalue(':id_types', $this->id_types, PDO::PARAM_INT);
         return $modifyEnginsInfoQuery->execute();
     }
+    
+
     public function addDebutPoste(){
         $addDebutPosteQuery = $this->db->prepare(
            'UPDATE `engins` 

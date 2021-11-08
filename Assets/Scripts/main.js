@@ -1,19 +1,14 @@
 /* CSV FORMAT TYPES*/
-function exportCSV(type, fn, dl) {
+function exportCSVTypes(type, fn, dl) {
     var elt = document.getElementById('listeTypes');
-    var wb = XLSX.utils.table_to_book(elt, { sheet: "Sheet JS" });
+    var wb = XLSX.utils.table_to_book(elt, { sheet: "Sheet1" });
     return dl ?
         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
         XLSX.writeFile(wb, fn || ('Liste_Types_Engins.' + (type || 'xlsx')));
 }
 
-$(document).ready(function() {
-    $('#listeTypes').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});
-
 /* CSV FORMAT EQUIPEMENTS*/
-function exportCSV(type, fn, dl) {
+function exportCSVEquipements(type, fn, dl) {
     var elt = document.getElementById('listeEquipements');
     var wb = XLSX.utils.table_to_book(elt, { sheet: "Sheet JS" });
     return dl ?
@@ -21,13 +16,8 @@ function exportCSV(type, fn, dl) {
         XLSX.writeFile(wb, fn || ('Liste_equipements_sur_engin.' + (type || 'xlsx')));
 }
 
-$(document).ready(function() {
-    $('#listeEquipements').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});
-
 /* CSV FORMAT CLIENTS*/
-function exportCSV(type, fn, dl) {
+function exportCSVClients(type, fn, dl) {
     var elt = document.getElementById('listeClients');
     var wb = XLSX.utils.table_to_book(elt, { sheet: "Sheet JS" });
     return dl ?
@@ -35,13 +25,8 @@ function exportCSV(type, fn, dl) {
         XLSX.writeFile(wb, fn || ('Liste_clients.' + (type || 'xlsx')));
 }
 
-$(document).ready(function() {
-    $('#listeClients').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});
-
 /* CSV FORMAT ANOMALIES*/
-function exportCSV(type, fn, dl) {
+function exportCSVAnomalies(type, fn, dl) {
     var elt = document.getElementById('listeAnomalies');
     var wb = XLSX.utils.table_to_book(elt, { sheet: "Sheet JS" });
     return dl ?
@@ -49,10 +34,6 @@ function exportCSV(type, fn, dl) {
         XLSX.writeFile(wb, fn || ('Liste_Anomalies.' + (type || 'xlsx')));
 }
 
-$(document).ready(function() {
-    $('#listeAnomalies').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});
 
 /* ZOOM IMAGES */
 function zoomIn() {
@@ -89,43 +70,10 @@ $(document).ready(function() {
 });
 
 
-/* PAGINATION */
-/* $(function() {
-    $("#tototo").simplePagination({
-        previousButtonClass: "btn btn-danger",
-        nextButtonClass: "btn btn-danger"
-    });
-
-
-}); */
-
-/* TIMER */
-/* function display_c() {
-    var refresh = 1000; // Refresh rate in milli seconds
-    mytime = setTimeout('display_ct()', refresh)
-}
-
-function display_ct() {
-    var x = new Date()
-    document.getElementById('ct').innerHTML = x;
-    display_c();
-}
- */
-
-
-
-
-/* $(document).ready(function() {
-    var multiChoix = new Choices('#equipements', {
-        removeItemButton: true
-
-    });
-});
- */
 /* DATE ET L'HEURE */
 
-document.getElementById('dateHeure').value = new Date().toDateInputValue();
-
+/* document.getElementById('dateHeure').value = new Date().toDateInputValue();
+ */
 /* KM BY ENGIN */
 function selectEngin(str) {
     if (str == "") {
@@ -141,4 +89,31 @@ function selectEngin(str) {
         xmlhttp.open("GET", "./Models/debPoste.php?enginKm=" + str, true);
         xmlhttp.send();
     }
+}
+
+/*compte*/
+function checkUnavailability(input) {
+    //Instanciation de l'objet XMLHttpRequest permettant de faire de l'AJAX
+    var request = new XMLHttpRequest();
+    //Les données sont envoyés en POST et c'est le controlleur qui va les traiter
+    request.open('POST', 'Controllers/ctrlInscription.php', true);
+    //Au changement d'état de la demande d'AJAX
+    request.onreadystatechange = function() {
+            //Si on a bien fini de recevoir la réponse de PHP (4) et que le code retour HTTP est ok (200)
+            if (request.readyState == 4 && request.status == 200) {
+                if (request.responseText == 1) { //Dans le cas ou la valeur dans le champ est déjà en BDD
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                } else if (request.responseText == 2) { //Dans le cas où le champ est vide
+                    input.classList.remove('is-valid', 'is-invalid');
+                } else { //Dans le cas ou la valeur dans le champ n'est pas en BDD
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                }
+            };
+        }
+        // Pour dire au serveur qu'il y a des données en POST à lire dans le corps
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    //Les données envoyées en POST. Elles sont séparées par un &
+    request.send('fieldValue=' + input.value + '&fieldName=' + input.name);
 }

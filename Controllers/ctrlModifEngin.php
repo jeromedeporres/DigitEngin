@@ -1,4 +1,5 @@
 <?php
+
 $formErrors = array();
 
 $types = new types();
@@ -102,7 +103,9 @@ if(!empty($_POST['id_Clients'])){
     }
 
 	/* IMAGE */
-    if ($_FILES['image']['error'] == 0) {
+
+
+     if (!empty($_FILES['image']) && $_FILES['image']['error'] == 0) {
         // On stock dans $fileInfos les informations concernant le chemin du fichier.
         $fileInfos = pathinfo($_FILES['image']['name']);
         // On crée un tableau contenant les extensions autorisées.
@@ -122,17 +125,21 @@ if(!empty($_POST['id_Clients'])){
             //On définit les droits du fichiers uploadé (Ici : écriture et lecture pour l'utilisateur apache, lecture uniquement pour le groupe et tout le monde)
             chmod($EnginPhoto, 0644);
             $engins->image = $EnginPhoto;
-          }else {
+                     
+         }else {
+           
             $formErrors['image'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Votre fichier ne s\'est pas téléversé correctement</div>';
           }
         }else {
           $formErrors['image'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Votre fichier n\'est pas du format attendu</div>';
         }
-    }else {
-        $formErrors['image'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Veuillez selectionner un fichier</div>';
-    }
+     }else {
+/*          $formErrors['image'] = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> Veuillez selectionner un fichier</div>';
+ */         $engins->image = $enginsInfo->image;
 
-    if (empty($formErrors)) {
+/*  } */
+
+     if (empty($formErrors)) {
         if (0<$engins->checkIdEnginsExist()){
             if($engins->modifyEnginsInfo()){
                $modifEnginMessage = '<div class="alert alert-success" role="alert"><i class="far fa-check-circle"></i> l\'engin a été Modifié.</div>'; 
@@ -143,4 +150,6 @@ if(!empty($_POST['id_Clients'])){
             $modifEnginMessage = '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> L\'engin n\'existe pas.</div>';
         }
     }
+}
+
 }

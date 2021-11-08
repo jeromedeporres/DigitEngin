@@ -6,8 +6,6 @@ include './Controllers/ctrlListeTypes.php';
 <div class="btnListeEquipements text-center">
 <a class="btn btn-outline-primary btn-sm" href="index.php"><i class="fas fa-home fa-2x"></i> Accueil</a>
 <a class="btn btn-outline-primary btn-sm" href="tableauDeBord.php"><i class="fas fa-tachometer-alt fa-2x"></i> Tableau De Bord</a>
-<!-- Btn CRUD -->
-<a class="btn btn-outline-danger btn-sm" href="index.php"><i class="fas fa-sign-out-alt fa-2x"></i> Déconnexion</a><!-- Btn de deconnexion -->
 </div> 
 
 <div>
@@ -30,7 +28,7 @@ if(isset($_GET['idDelete'])){ ?>
 
 <div class="pl-3 pr-3 tableTypes table-responsive">
 <table class="table table-hover" id="listeTypes">
-<button onclick="exportCSV('xlsx')" type="button" class="btn btn-success btn-sm float-left mb-1">Exporter en format csv</button>
+<button onclick="exportCSVTypes('xlsx')" class="btn btn-success btn-sm float-left mb-1">Exporter en format csv</button>
   <thead >
     <tr class="tdbTr">
       <th scope="col">Identifiant</th>
@@ -51,6 +49,7 @@ if(isset($_GET['idDelete'])){ ?>
     </table>
     
 </div>
+
 <!-- Footer -->
 <?php
   include 'footer.php'

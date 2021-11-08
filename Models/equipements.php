@@ -4,14 +4,10 @@ class equipements
 	public $id_equipements = 0;
 	public $nomequipements = '';
 	private $db = null;
-	public function __construct()
-	{
-		try {
-            $this->db = new PDO('mysql:host=localhost;dbname=digit_engin;charset=utf8', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        } catch (Exception $error) {
-            die($error->getMessage());
-        }
-	}
+	public function __construct() {
+        $this->db = dataBase::getInstance();
+    }
+    
 	public function checkEquipementsExist(){
         $checkEquipementsExist = $this->db->prepare(
             'SELECT COUNT(`nomEquipements`) AS `isEquipementsExist`

@@ -6,11 +6,7 @@ class types
 	private $db = null;
 	public function __construct()
 	{
-		try {
-            $this->db = new PDO('mysql:host=localhost;dbname=digit_engin;charset=utf8', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        } catch (Exception $error) {
-            die($error->getMessage());
-        }
+        $this->db = dataBase::getInstance();
 	}
 	public function checkTypeExist(){
         $checkTypeExist = $this->db->prepare(

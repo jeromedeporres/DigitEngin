@@ -9,14 +9,9 @@ class anomalies
     public $imageAnom2 = '';
     public $imageAnom3 = '';
 	private $db = null;
-	public function __construct()
-	{
-		try {
-            $this->db = new PDO('mysql:host=localhost;dbname=digit_engin;charset=utf8', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        } catch (Exception $error) {
-            die($error->getMessage());
-        }
-	}
+	public function __construct(){
+        $this->db = dataBase::getInstance();
+    }
 	public function checkAnomaliesExist(){
         $checkAnomaliesExist = $this->db->prepare(
             'SELECT COUNT(`id_anomalies`) AS `isAnomaliesExist`

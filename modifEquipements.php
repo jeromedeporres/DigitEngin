@@ -9,7 +9,6 @@ include './Controllers/ctrlModifEquipements.php';
   <!-- Btn CRUD -->
 	<a class="btn btn-outline-primary btn-sm" href="tableauDeBord.php"><i class="fas fa-tachometer-alt fa-2x"></i> Tableau De Bord</a>
   <a class="btn btn-outline-primary btn-sm" href="listeEquipements.php"><i class="far fa-building fa-2x"></i> Liste des Equipements</a>
-  <a class="btn btn-outline-danger btn-sm" href="index.php"><i class="fas fa-sign-out-alt fa-2x"></i> Déconnexion</a>
 </div>
 
   <!-- Titre Formulaire -->

@@ -7,8 +7,9 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 <script src="Assets/Scripts/main.js"></script>
+
 </body>
-<footer class="page-footer font-small fixed-bottom">
+      <footer class="page-footer font-small fixed-bottom">
          <div class="footer-copyright text-center py-3">© FM Logistic:
             <a href="https://www.fmlogistic.fr/" class="text-light"> fmlogistic.fr</a>
          </div>

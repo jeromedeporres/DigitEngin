@@ -55,7 +55,7 @@ echo "<img src='$row[imageObservation]' alt='' id='imgObs' width='100' height='1
 
 echo "<div class='form-group'>";
 echo "<label for='imageObservation' id='labelForm'>Image d'une Anomalie</label>";
-echo "<input id='imageObservation' class='form-control value='$row[imageObservation]' type='file' name='imageObservation' />";
+echo "<input id='imageObservation' class='form-control value='$row[imageObservation]' type='file' name='imageObservation' multiple='multiple' />";
 
 }
 mysqli_close($connexion);

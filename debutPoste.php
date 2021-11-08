@@ -10,7 +10,6 @@ include './Controllers/ctrlDebutPoste.php';
   <a class="btn btn-outline-primary btn-sm" href="index.php"><i class="fas fa-home fa-2x"></i> Accueil</a>
 <!-- Btn CRUD -->
 	<a class="btn btn-outline-primary btn-sm" href="tableauDeBord.php"><i class="fas fa-tachometer-alt fa-2x"></i> Tableau De Bord</a>
-  <a class="btn btn-outline-danger btn-sm" href="index.php"><i class="fas fa-sign-out-alt fa-2x"></i> Déconnexion</a>
 </div>
 
 <!-- Début Formulaire -->
@@ -23,7 +22,7 @@ include './Controllers/ctrlDebutPoste.php';
 
     <!-- DATE L'HEURE -->
 	<div class="form-group">
-		<label for="dateHeure" id="labelForm">L'heure</label>
+		<label for="dateHeure" id="labelForm">Selectionnez La date et L'heure</label>
  		<input class="form-control" id="dateHeure" value="<?php echo date("Y-m-d\TH:i"); ?>" type="datetime-local" name="debutPoste" />
 	</div>
 
